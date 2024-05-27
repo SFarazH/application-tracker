@@ -1,4 +1,4 @@
-import { React, useState } from "react";
+import { React, useState, useSyncExternalStore } from "react";
 import { useAuth } from "../components/AuthContext";
 import { Link } from "react-router-dom";
 import axios from "axios";
@@ -6,10 +6,14 @@ import axios from "axios";
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [errorMsg, setErrorMsg] = useState(null);
+  const [success, setSuccess] = useState(false);
+  const [error, setError] = useState(false);
+  const { authUser, isLoggedIn, setIsLoggedIn, setAuthUser } = useAuth();
   const handleSubmit = (e) => {
     e.preventDefault();
     const config = {
-      url: "http://localhost:8257/auth/login",
+      url: "http://localhost:4000/auth/login",
       method: "post",
       data: {
         email,
@@ -17,10 +21,18 @@ const Login = () => {
       },
     };
     axios(config)
-      .then((res) => console.log(res.data))
-      .catch((e) => console.error(e));
+      .then((res) => {
+        setSuccess(true);
+        setError(false);
+      })
+      .catch((e) => {
+        setError(true);
+        setSuccess(false);
+        setErrorMsg(e.response.data.message);
+        console.log(e);
+      });
   };
-  const { authUser, isLoggedIn, setIsLoggedIn, setAuthUser } = useAuth();
+
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-100">
       <div className="w-full max-w-md p-8 space-y-8 bg-white rounded shadow-md">
@@ -64,6 +76,16 @@ const Login = () => {
           >
             Submit
           </button>
+          {error && (
+            <p className="font-md font-semibold text-red-500 text-center">
+              {errorMsg}!
+            </p>
+          )}
+          {success && (
+            <p className="font-md font-semibold text-green-500 text-center">
+              Successfully Logged In!{" "}
+            </p>
+          )}
         </form>
         <div className="text-center">
           <p className="text-sm">

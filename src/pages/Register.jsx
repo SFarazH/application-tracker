@@ -9,24 +9,13 @@ const Register = () => {
   const [password, setPassword] = useState("");
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState(false);
+  const [errorMsg, setErrorMsg] = useState(null);
   const navigate = useNavigate();
 
-  const Success = () => (
-    <p className="text-xl text-green-500 font-semibold text-center">
-      Successfully Registered!
-    </p>
-  );
-  const Error = () => (
-    <p className="text-xl text-red-500 font-semibold text-center">
-      Email already exists!
-    </p>
-  );
-
   const handleSubmit = (e) => {
-    console.log("clicked");
     e.preventDefault();
     const config = {
-      url: "http://localhost:8257/auth/register",
+      url: "http://localhost:4000/auth/register",
       method: "post",
       data: {
         name,
@@ -38,12 +27,15 @@ const Register = () => {
       .then((res) => {
         console.log(res.data);
         setSuccess(true);
+        setError(false);
         setTimeout(() => {
           navigate("/login");
-        }, 1000);
+        }, 5000);
       })
       .catch((e) => {
-        e.response.status === 409 ? setError(true) : console.error(e);
+        setError(true);
+        setSuccess(false);
+        setErrorMsg(e.response.data.message);
       });
   };
 
@@ -107,8 +99,16 @@ const Register = () => {
             Submit
           </button>
         </form>
-        {success && <Success />}
-        {error && <Error />}
+        {success && (
+          <p className="text-md text-green-500 font-semibold text-center">
+            Successfully Registered!
+          </p>
+        )}
+        {error && (
+          <p className="text-md text-red-500 font-semibold text-center">
+            Email already exists!
+          </p>
+        )}
         <div className="text-center">
           <p className="text-sm">
             Already registered?{" "}
