@@ -1,35 +1,43 @@
 import { React, useState, useSyncExternalStore } from "react";
 import { useAuth } from "../components/AuthContext";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 
 const Login = () => {
+  const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errorMsg, setErrorMsg] = useState(null);
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState(false);
-  const { authUser, isLoggedIn, setIsLoggedIn, setAuthUser } = useAuth();
+  const { setAuthUser } = useAuth();
+
   const handleSubmit = (e) => {
     e.preventDefault();
     const config = {
       url: "http://localhost:4000/auth/login",
       method: "post",
+      headers: {
+        "Content-Type": "application/json",
+      },
       data: {
         email,
         password,
       },
+      withCredentials: true,
     };
     axios(config)
       .then((res) => {
-        setSuccess(true);
         setError(false);
+        setSuccess(true);
+        setTimeout(() => {
+          navigate("/dashboard");
+        }, 2000);
       })
       .catch((e) => {
         setError(true);
         setSuccess(false);
         setErrorMsg(e.response.data.message);
-        console.log(e);
       });
   };
 
@@ -86,6 +94,7 @@ const Login = () => {
               Successfully Logged In!{" "}
             </p>
           )}
+          {/* {isLoggedIn && <p>{authUser.name}</p>} */}
         </form>
         <div className="text-center">
           <p className="text-sm">
@@ -98,6 +107,20 @@ const Login = () => {
           </p>
         </div>
       </div>
+      <button
+        onClick={() => {
+          const config = {
+            url: "http://localhost:4000/auth/verify",
+            method: "get",
+            withCredentials: true,
+          };
+          axios(config)
+            .then((res) => console.log(res.data))
+            .catch((e) => console.error(e));
+        }}
+      >
+        click
+      </button>
     </div>
   );
 };

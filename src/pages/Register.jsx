@@ -29,7 +29,7 @@ const Register = () => {
         setSuccess(true);
         setError(false);
         setTimeout(() => {
-          navigate("/login");
+          navigate("/");
         }, 5000);
       })
       .catch((e) => {
