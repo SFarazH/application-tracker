@@ -1,4 +1,4 @@
-import { React, useState, useSyncExternalStore } from "react";
+import { React, useEffect, useState, useSyncExternalStore } from "react";
 import { useAuth } from "../components/AuthContext";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -10,7 +10,13 @@ const Login = () => {
   const [errorMsg, setErrorMsg] = useState(null);
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState(false);
-  const { setAuthUser } = useAuth();
+  const { authUser, verifyUser } = useAuth();
+
+  useEffect(() => {
+    if (authUser) {
+      navigate("/dashboard");
+    }
+  }, [authUser, navigate]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -30,9 +36,10 @@ const Login = () => {
       .then((res) => {
         setError(false);
         setSuccess(true);
+        verifyUser();
         setTimeout(() => {
           navigate("/dashboard");
-        }, 2000);
+        }, 100);
       })
       .catch((e) => {
         setError(true);
