@@ -6,6 +6,8 @@ import Navbar from "./components/Navbar";
 import Dashboard from "./pages/Dashboard";
 import ProtectedRoute from "./components/ProtectedRoute";
 import { AuthProvider } from "./components/AuthContext";
+import Tabs from "./pages/Tabs";
+import Home from "./pages/Home";
 
 function App() {
   return (
@@ -13,7 +15,7 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/register" element={<Register />} />
-          <Route path="/" element={<Login />} />
+          <Route path="/" element={<Home />} />
           <Route
             path="/dashboard"
             element={

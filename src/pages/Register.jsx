@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { useAuth } from "../components/AuthContext";
 import axios from "axios";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
-const Register = () => {
+const Register = ({ setActiveTab }) => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -29,8 +29,8 @@ const Register = () => {
         setSuccess(true);
         setError(false);
         setTimeout(() => {
-          navigate("/");
-        }, 5000);
+          setActiveTab(0);
+        }, 2000);
       })
       .catch((e) => {
         setError(true);
@@ -40,7 +40,7 @@ const Register = () => {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-100">
+    <div className="flex items-center justify-center mt-10">
       <div className="w-full max-w-md p-8 space-y-8 bg-white rounded shadow-md">
         <h2 className="text-2xl font-bold text-center">Register</h2>
         <form onSubmit={handleSubmit} className="space-y-6">
@@ -72,7 +72,10 @@ const Register = () => {
               id="email"
               className="w-full px-3 py-2 mt-1 border rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
               value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              onChange={(e) => {
+                setEmail(e.target.value);
+                error && setError(false);
+              }}
               required
             />
           </div>
@@ -112,11 +115,14 @@ const Register = () => {
         <div className="text-center">
           <p className="text-sm">
             Already registered?{" "}
-            <Link to="/login">
-              <span className="font-medium text-indigo-600 hover:text-indigo-500">
-                Login
-              </span>
-            </Link>
+            <span
+              onClick={() => {
+                setActiveTab(0);
+              }}
+              className="font-medium text-indigo-600 hover:text-indigo-500 cursor-pointer"
+            >
+              Login
+            </span>
           </p>
         </div>
       </div>

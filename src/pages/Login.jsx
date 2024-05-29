@@ -1,9 +1,9 @@
 import { React, useEffect, useState, useSyncExternalStore } from "react";
 import { useAuth } from "../components/AuthContext";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
-const Login = () => {
+const Login = ({ setActiveTab }) => {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -49,7 +49,7 @@ const Login = () => {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-100">
+    <div className="flex items-center justify-center mt-10">
       <div className="w-full max-w-md p-8 space-y-8 bg-white rounded shadow-md">
         <h2 className="text-2xl font-bold text-center">Login</h2>
         <form onSubmit={handleSubmit} className="space-y-6">
@@ -65,7 +65,10 @@ const Login = () => {
               id="email"
               className="w-full px-3 py-2 mt-1 border rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
               value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              onChange={(e) => {
+                setEmail(e.target.value);
+                error && setError(false);
+              }}
               required
             />
           </div>
@@ -106,28 +109,17 @@ const Login = () => {
         <div className="text-center">
           <p className="text-sm">
             New user?{" "}
-            <Link to="/register">
-              <span className="font-medium text-indigo-600 hover:text-indigo-500">
-                Register
-              </span>
-            </Link>
+            <span
+              onClick={() => {
+                setActiveTab(1);
+              }}
+              className="font-medium text-indigo-600 hover:text-indigo-500 cursor-pointer"
+            >
+              Register
+            </span>
           </p>
         </div>
       </div>
-      <button
-        onClick={() => {
-          const config = {
-            url: "http://localhost:4000/auth/verify",
-            method: "get",
-            withCredentials: true,
-          };
-          axios(config)
-            .then((res) => console.log(res.data))
-            .catch((e) => console.error(e));
-        }}
-      >
-        click
-      </button>
     </div>
   );
 };
