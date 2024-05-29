@@ -18,14 +18,14 @@ const Dashboard = () => {
         <>
           <Navbar />
           {authUser.name}
-          <div className="flex">
+          {/* <div className="flex">
             <div className="w-2/3">
               <Applications />
             </div>
             <div className="w-1/3">
               <Notes />
             </div>
-          </div>
+          </div> */}
         </>
       )}
     </div>
