@@ -4,7 +4,7 @@ const Notes = () => {
   return (
     <>
       <div className="bg-gray-800">
-        notes
+        <p>Notes</p>
       </div>
     </>
   );
