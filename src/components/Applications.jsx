@@ -19,9 +19,9 @@ const Applications = () => {
     },
   ];
   return (
-    <div className="bg-red-100 ">
-      <p>Applications</p>
-      <Table data={data} />
+    <div className="bg-red-100 p-4 py-2">
+      <p className="text-black text-2xl font-semibold">Applications</p>
+      <Table data={data}/>
     </div>
   );
 };

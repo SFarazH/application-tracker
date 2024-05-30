@@ -3,7 +3,7 @@ import { FaEdit, FaTrash } from "react-icons/fa";
 
 const Table = ({ data }) => {
   return (
-    <div className="overflow-x-auto px-4 my-2 ">
+    <div className="overflow-x-auto mt-4">
       <table className="w-full  table-auto rounded-lg">
         <thead>
           <tr className="text-left bg-blue-500">
