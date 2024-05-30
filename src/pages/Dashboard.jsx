@@ -28,12 +28,8 @@ const Dashboard = () => {
       ) : (
         <>
           <Navbar />
-
-          <div className="lg:flex">
+          <div className="lg:flex min-h-screen">
             <div className="lg:w-2/3">
-              {/* <Applications /> */}
-              {/* <Resume />
-               */}
               <Tabs
                 tabs={tabs}
                 activeTab={activeTab}
