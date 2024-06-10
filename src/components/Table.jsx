@@ -1,14 +1,11 @@
 import axios from "axios";
 import React, { useState } from "react";
 import { FaEdit, FaTrash, FaCheck } from "react-icons/fa";
+import { RiCheckboxBlankCircleFill } from "react-icons/ri";
 
-const Table = ({ data }) => {
-  const [editIndex, setEditIndex] = useState(null);
-  const [updatedStatus, setUpdatedStatus] = useState({});
-
-  const handleStatusChange = (index, value) => {
-    setUpdatedStatus((prev) => ({ ...prev, [index]: value }));
-  };
+const Table = ({ data, setTemp }) => {
+  const [updatedStatus, setNewStatus] = useState("");
+  const [idupdateStatus, setIdStatus] = useState("");
 
   function formatDate(isoString) {
     const date = new Date(isoString);
@@ -16,12 +13,11 @@ const Table = ({ data }) => {
     return date.toLocaleDateString("en-GB", options);
   }
 
-  const updateStatus = async (index, applicationId) => {
-    const status = updatedStatus[index];
+  const updateStatus = async (applicationId) => {
     const config = {
       url: `${process.env.REACT_APP_BACKEND_LINK}/application/update`,
       method: "patch",
-      data: status,
+      data: { status: updatedStatus },
       withCredentials: true,
       params: {
         applicationId: applicationId,
@@ -29,10 +25,43 @@ const Table = ({ data }) => {
     };
     axios(config)
       .then((res) => {
+        setIdStatus(null);
+        setTemp((p) => p + 1);
         console.log(res);
-        setEditIndex(null);
       })
       .catch((e) => console.error(e));
+  };
+  const displayStatus = (status) => {
+    let color = "";
+    switch (status) {
+      case "Pending":
+        color = "gold";
+        break;
+      case "Selected":
+        color = "green";
+        break;
+      case "Assignment":
+        color= "orange";
+        break;
+      case "Interviewing":
+        color = "green";
+        break;
+      case "Rejected":
+        color = "red";
+        break;
+
+      default:
+        color = "#F8E800";
+    }
+    return (
+      <div className="flex items-center">
+        <RiCheckboxBlankCircleFill
+          color={color}
+          style={{ marginRight: "4px" }}
+        />{" "}
+        <span className="w-32 inline-block">{status}</span>{" "}
+      </div>
+    );
   };
 
   const statusOptions = [
@@ -69,12 +98,12 @@ const Table = ({ data }) => {
               </td>
               <td className="py-2 px-4 border-b">{item.jobRole}</td>
               <td className="py-2 px-4 border-b">{item.platform}</td>
-              <td className="py-2 px-4 border-b">
-                {editIndex === index ? (
+              <td className="py-2  border-b">
+                {item._id === idupdateStatus ? (
                   <select
-                    value={updatedStatus[index] || item.status}
-                    onChange={(e) => handleStatusChange(index, e.target.value)}
-                    className="rounded w-32 "
+                    value={updatedStatus}
+                    onChange={(e) => setNewStatus(e.target.value)}
+                    className="rounded w-32"
                   >
                     <option value="">Select Status</option>
                     {statusOptions.map((status) => (
@@ -82,7 +111,7 @@ const Table = ({ data }) => {
                     ))}
                   </select>
                 ) : (
-                  <span className="w-32 inline-block">{item.status}</span>
+                  displayStatus(item.status)
                 )}
               </td>
               <td className="py-2 px-4 border-b">
@@ -93,18 +122,21 @@ const Table = ({ data }) => {
                   index === data.length - 1 ? "rounded-br-lg" : ""
                 }`}
               >
-                <div className="flex justify-between">
-                  {editIndex === index ? (
+                <div className="flex justify-between gap-4 md:gap-0">
+                  {item._id === idupdateStatus ? (
                     <FaCheck
                       size={25}
                       className="text-green-500 hover:text-green-700 mx-1 cursor-pointer"
-                      onClick={() => updateStatus(index, item._id)}
+                      onClick={() => updateStatus(item._id)}
                     />
                   ) : (
                     <FaEdit
                       className="text-blue-500 hover:text-blue-700 mx-1 cursor-pointer"
                       size={25}
-                      onClick={() => setEditIndex(index)}
+                      onClick={() =>
+                        // setEditIndex(index)
+                        setIdStatus(item._id)
+                      }
                     />
                   )}
                   <FaTrash

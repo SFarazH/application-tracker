@@ -7,8 +7,8 @@ import axios from "axios";
 const Applications = () => {
   const [isForm, setForm] = useState(false);
   const [applications, setApplications] = useState([]);
+  const [temp, setTemp] = useState(0);
 
-  
   const getData = async () => {
     const config = {
       url: `${process.env.REACT_APP_BACKEND_LINK}/application/get`,
@@ -22,8 +22,8 @@ const Applications = () => {
 
   useEffect(() => {
     getData();
-  }, []);
- 
+  }, [temp]);
+
   return (
     <div className="p-4 py-2">
       <div className="flex justify-between items-center">
@@ -48,7 +48,11 @@ const Applications = () => {
           />
         )}
       </div>
-      {isForm ? <ApplicationForm /> : <Table data={applications} />}
+      {isForm ? (
+        <ApplicationForm />
+      ) : (
+        <Table data={applications} setTemp={setTemp} />
+      )}
     </div>
   );
 };
