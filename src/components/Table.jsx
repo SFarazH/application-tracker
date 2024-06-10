@@ -41,7 +41,7 @@ const Table = ({ data, setTemp }) => {
         color = "green";
         break;
       case "Assignment":
-        color= "orange";
+        color = "orange";
         break;
       case "Interviewing":
         color = "green";
@@ -105,7 +105,6 @@ const Table = ({ data, setTemp }) => {
                     onChange={(e) => setNewStatus(e.target.value)}
                     className="rounded w-32"
                   >
-                    <option value="">Select Status</option>
                     {statusOptions.map((status) => (
                       <option value={status.label}>{status.label}</option>
                     ))}

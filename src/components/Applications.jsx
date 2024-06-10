@@ -49,7 +49,7 @@ const Applications = () => {
         )}
       </div>
       {isForm ? (
-        <ApplicationForm />
+        <ApplicationForm setForm={setForm} setTemp={setTemp} />
       ) : (
         <Table data={applications} setTemp={setTemp} />
       )}

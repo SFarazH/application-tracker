@@ -1,5 +1,5 @@
 import axios from "axios";
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 
 const statusOptions = [
@@ -11,7 +11,8 @@ const statusOptions = [
   { value: "Rejected", label: "Rejected" },
 ];
 
-const ApplicationForm = () => {
+const ApplicationForm = ({ setTemp, setForm }) => {
+  const [success, setSuccess] = useState(false);
   const {
     register,
     handleSubmit,
@@ -26,7 +27,13 @@ const ApplicationForm = () => {
       data: data,
     };
     axios(config)
-      .then((res) => console.log(res))
+      .then(() => {
+        setSuccess(true);
+        setTemp((p) => p + 1);
+        setTimeout(() => {
+          setForm(false);
+        }, 1500);
+      })
       .catch((e) => console.error(e));
   };
 
@@ -160,6 +167,11 @@ const ApplicationForm = () => {
           Submit
         </button>
       </div>
+      {success && (
+        <p className="text-green-500 font-semibold text-center mt-4">
+          Application added successfully!{" "}
+        </p>
+      )}
     </form>
   );
 };
