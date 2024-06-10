@@ -12,16 +12,16 @@ export function AuthProvider({ children }) {
   const [isLoading, setIsLoading] = useState(true);
 
   const [temp, setTemp] = useState(0);
-  
+
   const verifyUser = async () => {
     try {
       const response = await axios.get("http://localhost:4000/auth/verify", {
         withCredentials: true,
       });
-      console.log("verifyUser - response:", response.data);
+      // console.log("verifyUser - response:", response.data);
       setAuthUser(response.data);
     } catch (error) {
-      console.error("verifyUser - error:", error);
+      console.error(error);
       setAuthUser(null);
     } finally {
       setIsLoading(false);
@@ -31,13 +31,11 @@ export function AuthProvider({ children }) {
     verifyUser();
   }, [temp]);
 
-
-
   const value = {
     authUser,
     setAuthUser,
     isLoading,
-    verifyUser
+    verifyUser,
   };
 
   return (
