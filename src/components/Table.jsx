@@ -6,6 +6,8 @@ import { RiCheckboxBlankCircleFill } from "react-icons/ri";
 const Table = ({ data, setTemp }) => {
   const [updatedStatus, setNewStatus] = useState("");
   const [idupdateStatus, setIdStatus] = useState("");
+  const [idDelete, setIdDelete] = useState("");
+  const [open, setOpen] = useState(false);
 
   function formatDate(isoString) {
     const date = new Date(isoString);
@@ -63,7 +65,6 @@ const Table = ({ data, setTemp }) => {
       </div>
     );
   };
-
   const statusOptions = [
     { value: "Applied", label: "Applied" },
     { value: "Applied Referral", label: "Applied Referral" },
@@ -72,6 +73,24 @@ const Table = ({ data, setTemp }) => {
     { value: "Selected", label: "Selected" },
     { value: "Rejected", label: "Rejected" },
   ];
+
+  const deleteNote = async (id) => {
+    const config = {
+      url: `${process.env.REACT_APP_BACKEND_LINK}/application/rem`,
+      method: "delete",
+      params: {
+        applicationId: id,
+      },
+      withCredentials: true,
+    };
+    axios(config)
+      .then((res) => {
+        console.log(res);
+        setTemp((p) => p + 1);
+        setOpen(false);
+      })
+      .catch((e) => console.error(e));
+  };
 
   return (
     <div className="overflow-x-auto mt-4">
@@ -126,7 +145,9 @@ const Table = ({ data, setTemp }) => {
                     <FaCheck
                       size={25}
                       className="text-green-500 hover:text-green-700 mx-1 cursor-pointer"
-                      onClick={() => updateStatus(item._id)}
+                      onClick={() => {
+                        updateStatus(item._id);
+                      }}
                     />
                   ) : (
                     <FaEdit
@@ -141,6 +162,10 @@ const Table = ({ data, setTemp }) => {
                   <FaTrash
                     className="text-red-500 hover:text-red-700 mx-1 cursor-pointer"
                     size={25}
+                    onClick={() => {
+                      setIdDelete(item._id);
+                      setOpen(true);
+                    }}
                   />
                 </div>
               </td>
@@ -148,6 +173,37 @@ const Table = ({ data, setTemp }) => {
           ))}
         </tbody>
       </table>
+      {open && (
+        <div className="flex justify-center items-center overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
+          <div className="fixed inset-0 bg-black opacity-70"></div>
+          <div className="relative w-auto my-6 mx-auto max-w-3xl">
+            <div className=" rounded-lg shadow-lg relative flex flex-col w-full bg-white p-5">
+              <p className="font-semibold text-lg">
+                Are you sure you want to delete this application?
+              </p>
+              <div className="grid grid-cols-2 gap-2 mt-2">
+                <button
+                  className="bg-green-500 hover:bg-green-600 cursor-pointer p-2 rounded-lg text-xl font-semibold"
+                  onClick={() => {
+                    deleteNote(idDelete);
+                  }}
+                >
+                  Yes
+                </button>
+                <button
+                  className="bg-red-500 hover:bg-red-600 cursor-pointer p-2 rounded-lg text-xl font-semibold"
+                  onClick={() => {
+                    setOpen(false);
+                    setIdDelete("");
+                  }}
+                >
+                  No
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
