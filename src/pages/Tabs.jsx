@@ -3,7 +3,7 @@ import React from "react";
 const Tabs = ({ tabs, activeTab, setActiveTab }) => {
   return (
     <div className="">
-      <div className="flex border-gray-200 mx-8 mt-3">
+      <div className="flex border-gray-200 mx-8 pt-3">
         {tabs.map((tab, index) => (
           <button
             key={index}

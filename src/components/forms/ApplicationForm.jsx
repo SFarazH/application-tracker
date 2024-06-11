@@ -16,6 +16,7 @@ const ApplicationForm = ({ setTemp, setForm }) => {
   const {
     register,
     handleSubmit,
+    setValue,
     formState: { errors },
   } = useForm();
 
@@ -36,21 +37,24 @@ const ApplicationForm = ({ setTemp, setForm }) => {
       })
       .catch((e) => console.error(e));
   };
+  const setTodayDate = () => {
+    const today = new Date().toISOString().split("T")[0]; // Format the date as YYYY-MM-DD
+    setValue("dateApplied", today);
+  };
 
   const onSubmit = (data) => {
     console.log(data);
     addApplication(data);
   };
-  console.log(process.env.REACT_APP_BACKEND_LINK, "url");
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="mx-16 p-6 bg-white shadow-md rounded-md"
+      className="mx-2 md:mx-16  p-6 bg-white shadow-md rounded-md mt-4"
     >
-      <div className="mb-4 flex items-center">
+      <div className="mb-4 md:flex items-center">
         <label
           htmlFor="companyName"
-          className="block text-gray-700 font-bold mb-2 w-2/5"
+          className="block text-gray-700 font-bold mb-2  md:w-2/5"
         >
           Company Name
         </label>
@@ -69,10 +73,10 @@ const ApplicationForm = ({ setTemp, setForm }) => {
         )}
       </div>
 
-      <div className="mb-4 flex items-center">
+      <div className="mb-4 md:flex items-center">
         <label
           htmlFor="jobRole"
-          className="block text-gray-700 font-bold mb-2 w-2/5"
+          className="block text-gray-700 font-bold mb-2 md:w-2/5"
         >
           Job Role
         </label>
@@ -89,10 +93,10 @@ const ApplicationForm = ({ setTemp, setForm }) => {
         )}
       </div>
 
-      <div className="mb-4 flex items-center">
+      <div className="mb-4 md:flex items-center">
         <label
           htmlFor="platform"
-          className="block text-gray-700 font-bold mb-2 w-2/5"
+          className="block text-gray-700 font-bold mb-2 md:w-2/5"
         >
           Platform
         </label>
@@ -111,21 +115,32 @@ const ApplicationForm = ({ setTemp, setForm }) => {
         )}
       </div>
 
-      <div className="mb-4 flex items-center">
+      <div className="mb-4 md:flex items-center">
         <label
           htmlFor="dateApplied"
-          className="block text-gray-700 font-bold mb-2 w-2/5"
+          className="block text-gray-700 font-bold mb-2 md:w-2/5"
         >
           Date Applied
         </label>
-        <input
-          type="date"
-          id="dateApplied"
-          {...register("dateApplied", { required: "Date applied is required" })}
-          className={`shadow appearance-none border rounded w-full px-3 py-2 text-gray-700  focus:outline-blue-500 ${
-            errors.dateApplied ? "border-red-500" : ""
-          }`}
-        />
+        <div className="flex w-full">
+          <input
+            type="date"
+            id="dateApplied"
+            {...register("dateApplied", {
+              required: "Date applied is required",
+            })}
+            className={`shadow appearance-none border rounded-l w-full px-3 py-2 text-gray-700  focus:outline-blue-500 ${
+              errors.dateApplied ? "border-red-500" : ""
+            }`}
+          />
+          <button
+            type="button"
+            onClick={setTodayDate}
+            className="bg-blue-500 shadow text-white px-3 py-1 rounded-r font-semibold"
+          >
+            Today
+          </button>
+        </div>
         {errors.dateApplied && (
           <span className="text-red-500 text-sm">
             {errors.dateApplied.message}
@@ -133,10 +148,10 @@ const ApplicationForm = ({ setTemp, setForm }) => {
         )}
       </div>
 
-      <div className="mb-4 flex items-center">
+      <div className="mb-4 md:flex items-center">
         <label
           htmlFor="status"
-          className="block text-gray-700 font-bold mb-2 w-2/5"
+          className="block text-gray-700 font-bold mb-2 md:w-2/5"
         >
           Status
         </label>
@@ -162,7 +177,7 @@ const ApplicationForm = ({ setTemp, setForm }) => {
       <div className="flex items-center justify-center">
         <button
           type="submit"
-          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-blue-800"
+          className="bg-blue-500  hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-blue-800"
         >
           Submit
         </button>

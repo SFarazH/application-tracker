@@ -176,17 +176,18 @@ const Table = ({ data, setTemp }) => {
           ))}
         </tbody>
       </table>
+      {/* modal */}
       {open && (
-        <div className="flex justify-center items-center overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
+        <div className="flex justify-center items-center overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none px-2">
           <div className="fixed inset-0 bg-black opacity-70"></div>
           <div className="relative w-auto my-6 mx-auto max-w-3xl">
             <div className=" rounded-lg shadow-lg relative flex flex-col w-full bg-white p-5">
               <p className="font-semibold text-lg">
                 Are you sure you want to delete this application?
               </p>
-              <div className="grid grid-cols-2 gap-2 mt-2">
+              <div className="grid grid-cols-2 gap-6 mt-8">
                 <button
-                  className="bg-green-500 hover:bg-green-600 cursor-pointer p-2 rounded-lg text-xl font-semibold"
+                  className="bg-green-500 text-white hover:bg-green-600 cursor-pointer p-2 rounded-lg text-xl font-semibold"
                   onClick={() => {
                     deleteNote(idDelete);
                   }}
@@ -194,7 +195,7 @@ const Table = ({ data, setTemp }) => {
                   Yes
                 </button>
                 <button
-                  className="bg-red-500 hover:bg-red-600 cursor-pointer p-2 rounded-lg text-xl font-semibold"
+                  className="bg-red-500 text-white hover:bg-red-600 cursor-pointer p-2 rounded-lg text-xl font-semibold"
                   onClick={() => {
                     setOpen(false);
                     setIdDelete("");
