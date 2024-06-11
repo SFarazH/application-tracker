@@ -4,7 +4,15 @@ import { FaEdit, FaTrash, FaCheck } from "react-icons/fa";
 import { RiCheckboxBlankCircleFill } from "react-icons/ri";
 
 const Table = ({ data, setTemp }) => {
-  const [updatedStatus, setNewStatus] = useState("");
+  const statusOptions = [
+    { value: "Applied", label: "Applied" },
+    { value: "Applied Referral", label: "Applied Referral" },
+    { value: "Assignment", label: "Assignment" },
+    { value: "Interviewing", label: "Interviewing" },
+    { value: "Selected", label: "Selected" },
+    { value: "Rejected", label: "Rejected" },
+  ];
+  const [updatedStatus, setNewStatus] = useState(statusOptions[0].value);
   const [idupdateStatus, setIdStatus] = useState("");
   const [idDelete, setIdDelete] = useState("");
   const [open, setOpen] = useState(false);
@@ -65,14 +73,6 @@ const Table = ({ data, setTemp }) => {
       </div>
     );
   };
-  const statusOptions = [
-    { value: "Applied", label: "Applied" },
-    { value: "Applied Referral", label: "Applied Referral" },
-    { value: "Assignment", label: "Assignment" },
-    { value: "Interviewing", label: "Interviewing" },
-    { value: "Selected", label: "Selected" },
-    { value: "Rejected", label: "Rejected" },
-  ];
 
   const deleteNote = async (id) => {
     const config = {
@@ -90,6 +90,9 @@ const Table = ({ data, setTemp }) => {
         setOpen(false);
       })
       .catch((e) => console.error(e));
+  };
+  const border = (index) => {
+    return index === data.length - 1 ? "" : "border-b";
   };
 
   return (
@@ -109,15 +112,15 @@ const Table = ({ data, setTemp }) => {
           {data.map((item, index) => (
             <tr className="bg-white" key={index}>
               <td
-                className={`py-2 px-4 border-b ${
-                  index === data.length - 1 ? "rounded-bl-lg" : ""
+                className={`py-2 px-4  ${
+                  index === data.length - 1 ? "rounded-bl-lg" : "border-b"
                 }`}
               >
                 {item.companyName}
               </td>
-              <td className="py-2 px-4 border-b">{item.jobRole}</td>
-              <td className="py-2 px-4 border-b">{item.platform}</td>
-              <td className="py-2  border-b">
+              <td className={`py-2 px-4 ${border(index)} `}>{item.jobRole}</td>
+              <td className={`py-2 px-4 ${border(index)} `}>{item.platform}</td>
+              <td className={`py-2 px-4 ${border(index)} `}>
                 {item._id === idupdateStatus ? (
                   <select
                     value={updatedStatus}
@@ -132,12 +135,12 @@ const Table = ({ data, setTemp }) => {
                   displayStatus(item.status)
                 )}
               </td>
-              <td className="py-2 px-4 border-b">
+              <td className={`py-2 px-4 ${border(index)} `}>
                 {formatDate(item.dateApplied)}
               </td>
               <td
-                className={`py-2 px-4 border-b text-center ${
-                  index === data.length - 1 ? "rounded-br-lg" : ""
+                className={`py-2 px-4 text-center ${
+                  index === data.length - 1 ? "rounded-br-lg" : " border-b"
                 }`}
               >
                 <div className="flex justify-between gap-4 md:gap-0">

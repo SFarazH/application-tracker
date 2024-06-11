@@ -1,6 +1,4 @@
-import React, { useState } from "react";
-import Login from "./Login";
-import Register from "./Register";
+import React from "react";
 
 const Tabs = ({ tabs, activeTab, setActiveTab }) => {
   return (
