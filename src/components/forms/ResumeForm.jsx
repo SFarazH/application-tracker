@@ -2,7 +2,7 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 
-const ResumeForm = ({ setTemp }) => {
+const ResumeForm = ({ setTemp, setForm }) => {
   const {
     register,
     handleSubmit,
@@ -26,6 +26,9 @@ const ResumeForm = ({ setTemp }) => {
         }
       );
       setTemp((p) => p + 1);
+      setTimeout(() => {
+        setForm(false);
+      }, 1500);
     } catch (error) {
       console.error("Error uploading the resume:", error);
     }
