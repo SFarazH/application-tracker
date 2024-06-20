@@ -17,8 +17,8 @@ const Navbar = () => {
     return <img src={svgURI} alt={username} {...props} />;
   };
   return (
-    <div className="flex justify-between px-3 md:px-8 items-center bg-blue-200 sticky top-0 z-50  ">
-      <p className="text-2xl font-bold">Welcome {authUser.name}!</p>
+    <div className="flex justify-between px-3 md:px-8 items-center bg-indigo-950 sticky top-0 z-50  ">
+      <p className="text-2xl font-bold text-white">Welcome {authUser.name}!</p>
 
       <Menu as="div" className="relative">
         <div>

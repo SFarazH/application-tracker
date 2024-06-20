@@ -70,7 +70,7 @@ const Notes = () => {
 
   return (
     <>
-      <div className="bg-indigo-800 p-6 py-5 h-full">
+      <div className="bg-[#02182B] p-6 py-5 h-full">
         <div className="flex items-center justify-between">
           <div className="flex gap-2">
             <FaNoteSticky size={35} color="#FFDB58" />
@@ -79,12 +79,14 @@ const Notes = () => {
           {isForm ? (
             <RiCloseCircleLine
               size={30}
+              color="red"
               className="cursor-pointer"
               onClick={() => setForm(false)}
             />
           ) : (
             <RiAddCircleLine
               size={30}
+              color="green"
               className="cursor-pointer"
               onClick={() => setForm(true)}
             />
@@ -126,7 +128,7 @@ const Notes = () => {
               {notes.map((note) => (
                 <>
                   <div
-                    className="flex justify-between bg-yellow-200 p-2 rounded-lg"
+                    className="flex justify-between bg-[#fcf5c7] p-2 rounded-lg"
                     key={note.noteId}
                   >
                     <p className="text-md">{note.note}</p>{" "}

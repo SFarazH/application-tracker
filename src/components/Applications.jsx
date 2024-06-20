@@ -3,10 +3,12 @@ import Table from "./Table";
 import ApplicationForm from "./forms/ApplicationForm";
 import { IoCloseCircle, IoAddCircle } from "react-icons/io5";
 import axios from "axios";
+import Spinner from "./Spinner";
 
 const Applications = () => {
   const [isForm, setForm] = useState(false);
   const [applications, setApplications] = useState([]);
+  const [isSpinner, setSpinner] = useState(true);
   const [temp, setTemp] = useState(0);
 
   const getData = async () => {
@@ -16,7 +18,10 @@ const Applications = () => {
       withCredentials: true,
     };
     axios(config)
-      .then((res) => setApplications(res.data))
+      .then((res) => {
+        setApplications(res.data);
+        setSpinner(false);
+      })
       .catch((e) => console.error(e));
   };
 
@@ -50,6 +55,10 @@ const Applications = () => {
       </div>
       {isForm ? (
         <ApplicationForm setForm={setForm} setTemp={setTemp} />
+      ) : isSpinner ? (
+        <div className="flex justify-center mt-4">
+          <Spinner />
+        </div>
       ) : (
         <Table data={applications} setTemp={setTemp} />
       )}

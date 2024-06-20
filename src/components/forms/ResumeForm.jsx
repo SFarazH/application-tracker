@@ -48,7 +48,7 @@ const ResumeForm = ({ setTemp, setForm }) => {
             id="role"
             type="text"
             {...register("role", { required: "Role is required" })}
-            className={`shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 focus:outline-none focus:shadow-outline ${
+            className={`shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 focus:outline-none focus:ring-1 focus:ring-indigo-950 focus:ring-offset ${
               errors.role ? "border-red-500" : ""
             }`}
           />
@@ -65,7 +65,7 @@ const ResumeForm = ({ setTemp, setForm }) => {
             id="file"
             type="file"
             {...register("file", { required: "File is required" })}
-            className={`shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 focus:outline-none focus:shadow-outline ${
+            className={`shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 focus:outline-none focus:ring-1 focus:ring-indigo-950 focus:ring-offset ${
               errors.file ? "border-red-500" : ""
             }`}
           />
@@ -77,9 +77,9 @@ const ResumeForm = ({ setTemp, setForm }) => {
         <div className="flex items-center justify-between">
           <button
             type="submit"
-            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+            className="bg-indigo-950 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:ring-2 focus:ring-indigo-950 focus:ring-offset-1 mx-auto"
           >
-            Upload
+            Add Resume
           </button>
         </div>
       </form>

@@ -4,11 +4,13 @@ import { FaFilePdf } from "react-icons/fa";
 import { ImCross } from "react-icons/im";
 import ResumeForm from "./forms/ResumeForm";
 import { IoAddCircle, IoCloseCircle } from "react-icons/io5";
+import Spinner from "./Spinner";
 
 const Resume = () => {
   const [resumes, setResumes] = useState([]);
   const [temp, setTemp] = useState(0);
   const [isForm, setForm] = useState(false);
+  const [isSpinner, setSpinner] = useState(true);
 
   const getResumes = async () => {
     const config = {
@@ -17,7 +19,10 @@ const Resume = () => {
       withCredentials: true,
     };
     axios(config)
-      .then((res) => setResumes(res.data))
+      .then((res) => {
+        setResumes(res.data);
+        setSpinner(false);
+      })
       .catch((e) => console.error(e));
   };
 
@@ -89,11 +94,15 @@ const Resume = () => {
       </div>
       {isForm ? (
         <ResumeForm setTemp={setTemp} setForm={setForm} />
+      ) : isSpinner ? (
+        <div className="flex justify-center mt-4">
+          <Spinner />
+        </div>
       ) : (
         <div className="grid grid-cols-2 md:grid-cols-5 gap-4 mt-4">
           {resumes?.map((resume) => (
             <>
-              <div className="border rounded-lg flex justify-between items-center cursor-pointer">
+              <div className="rounded-lg flex justify-between items-center cursor-pointer bg-[#02182B] text-white">
                 <p
                   className="text-xl p-2 w-full"
                   onClick={() => openResume(resume._id)}
