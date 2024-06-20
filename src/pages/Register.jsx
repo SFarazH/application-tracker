@@ -40,14 +40,14 @@ const Register = ({ setActiveTab }) => {
   };
 
   return (
-    <div className="flex items-center justify-center mt-10">
-      <div className="w-full max-w-md p-8 space-y-8 bg-white rounded shadow-md">
+    <div className="flex items-center justify-center mt-4">
+      <div className="w-full max-w-md p-8 space-y-8 bg-blue-300 rounded">
         <h2 className="text-2xl font-bold text-center">Register</h2>
         <form onSubmit={handleSubmit} className="space-y-6">
           <div>
             <label
               htmlFor="name"
-              className="block text-sm font-medium text-gray-700"
+              className="block text-sm font-medium text-gray-800"
             >
               Name
             </label>
@@ -63,9 +63,9 @@ const Register = ({ setActiveTab }) => {
           <div>
             <label
               htmlFor="email"
-              className="block text-sm font-medium text-gray-700"
+              className="block text-sm font-medium text-gray-800"
             >
-              Email Address
+              Email
             </label>
             <input
               type="email"
@@ -82,7 +82,7 @@ const Register = ({ setActiveTab }) => {
           <div>
             <label
               htmlFor="password"
-              className="block text-sm font-medium text-gray-700"
+              className="block text-sm font-medium text-gray-800"
             >
               Password
             </label>
@@ -97,7 +97,7 @@ const Register = ({ setActiveTab }) => {
           </div>
           <button
             type="submit"
-            className="w-full px-4 py-2 font-semibold text-white bg-indigo-600 rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+            className="px-4 py-2 font-semibold text-white bg-indigo-950 rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 w-fit block mx-auto"
           >
             Submit
           </button>
@@ -113,13 +113,13 @@ const Register = ({ setActiveTab }) => {
           </p>
         )}
         <div className="text-center">
-          <p className="text-sm">
+          <p className="text-md">
             Already registered?{" "}
             <span
               onClick={() => {
                 setActiveTab(0);
               }}
-              className="font-medium text-indigo-600 hover:text-indigo-500 cursor-pointer"
+              className="font-medium text-indigo-950 hover:text-indigo-800 cursor-pointer"
             >
               Login
             </span>

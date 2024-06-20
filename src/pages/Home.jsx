@@ -31,10 +31,10 @@ const Home = () => {
 
   return (
     <>
-      <div className="block justify-between md:flex pt-4 md:pt-12 px-4 md:px-8">
-        <div>
-          <p className="text-6xl md:text-8xl font-thin luckiest flex flex-wrap text-center">
-            Application Tracker
+      <div className="block justify-between lg:flex pt-4 md:pt-12 px-4 md:px-8 gap-4">
+        <div className="lg:w-3/5">
+          <p className="text-6xl md:text-8xl font-thin luckiest flex flex-wrap justify-center mx-auto">
+            <span className="lg:mr-8">Application </span> <span>Tracker</span>
           </p>
           <p className="covered text-3xl md:text-[2.8em] mt-4 md:mt-8 text-green-500 text-center">
             One stop portal to manage all your job applications!{" "}
@@ -49,7 +49,7 @@ const Home = () => {
             />
           </div>
         </div>
-        <div className="md:w-1/3">
+        <div className="lg:w-2/5 h-fit md:max-w-lg mx-auto bg-blue-300 rounded-xl pt-5 mb-5">
           <Tabs tabs={tabs} activeTab={activeTab} setActiveTab={setActiveTab} />
         </div>
       </div>
