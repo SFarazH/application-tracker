@@ -22,6 +22,7 @@ const Resume = () => {
   };
 
   const openResume = async (id) => {
+    console.log("opening resume...");
     const config = {
       url: `${process.env.REACT_APP_BACKEND_LINK}/resume/getId`,
       method: "get",
@@ -94,7 +95,7 @@ const Resume = () => {
             <>
               <div className="border rounded-lg flex justify-between items-center cursor-pointer">
                 <p
-                  className="text-xl p-2"
+                  className="text-xl p-2 w-full"
                   onClick={() => openResume(resume._id)}
                 >
                   {resume.role}

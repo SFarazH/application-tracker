@@ -1,4 +1,4 @@
-import { React, useEffect, useState, useSyncExternalStore } from "react";
+import { React, useEffect, useState } from "react";
 import { useAuth } from "../components/AuthContext";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -21,7 +21,7 @@ const Login = ({ setActiveTab }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     const config = {
-      url: "http://localhost:4000/auth/login",
+      url: `${process.env.REACT_APP_BACKEND_LINK}/auth/login`,
       method: "post",
       headers: {
         "Content-Type": "application/json",

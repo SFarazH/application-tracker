@@ -14,18 +14,18 @@ export function AuthProvider({ children }) {
   const [temp, setTemp] = useState(0);
 
   const verifyUser = async () => {
-    try {
-      const response = await axios.get("http://localhost:4000/auth/verify", {
-        withCredentials: true,
-      });
-      // console.log("verifyUser - response:", response.data);
-      setAuthUser(response.data);
-    } catch (error) {
-      console.error(error);
-      setAuthUser(null);
-    } finally {
-      setIsLoading(false);
-    }
+    const config = {
+      url: `${process.env.REACT_APP_BACKEND_LINK}/auth/verify`,
+      method: "get",
+      withCredentials: true,
+    };
+    axios(config)
+      .then((res) => setAuthUser(res.data))
+      .catch((error) => {
+        console.error(error);
+        setAuthUser(null);
+      })
+      .finally(() => setIsLoading(false));
   };
   useEffect(() => {
     verifyUser();

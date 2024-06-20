@@ -38,7 +38,7 @@ const Navbar = () => {
               onClick={() => {
                 console.log("logged out");
                 const config = {
-                  url: "http://localhost:4000/auth/logout",
+                  url: `${process.env.REACT_APP_BACKEND_LINK}/auth/logout`,
                   method: "post",
                   withCredentials: true,
                 };

@@ -15,7 +15,7 @@ const Register = ({ setActiveTab }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     const config = {
-      url: "http://localhost:4000/auth/register",
+      url: `${process.env.REACT_APP_BACKEND_LINK}/auth/register`,
       method: "post",
       data: {
         name,
@@ -109,7 +109,7 @@ const Register = ({ setActiveTab }) => {
         )}
         {error && (
           <p className="text-md text-red-500 font-semibold text-center">
-            Email already exists!
+            {errorMsg}
           </p>
         )}
         <div className="text-center">
