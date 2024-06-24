@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useState } from "react";
 import { FaEdit, FaTrash, FaCheck } from "react-icons/fa";
 import { RiCheckboxBlankCircleFill } from "react-icons/ri";
+import { ThreeDots } from "react-loader-spinner";
 
 const Table = ({ data, setTemp }) => {
   const statusOptions = [
@@ -12,6 +13,8 @@ const Table = ({ data, setTemp }) => {
     { value: "Selected", label: "Selected" },
     { value: "Rejected", label: "Rejected" },
   ];
+
+  const [check, setCheck] = useState(false);
   const [updatedStatus, setNewStatus] = useState(statusOptions[0].value);
   const [idupdateStatus, setIdStatus] = useState("");
   const [idDelete, setIdDelete] = useState("");
@@ -22,8 +25,8 @@ const Table = ({ data, setTemp }) => {
     const options = { day: "numeric", month: "short", year: "numeric" };
     return date.toLocaleDateString("en-GB", options);
   }
-
   const updateStatus = async (applicationId) => {
+    setCheck(true);
     const config = {
       url: `${process.env.REACT_APP_BACKEND_LINK}/application/update`,
       method: "patch",
@@ -35,11 +38,17 @@ const Table = ({ data, setTemp }) => {
     };
     axios(config)
       .then((res) => {
-        setIdStatus(null);
+        setTimeout(() => {
+          setIdStatus(null);
+        }, 1000);
         setTemp((p) => p + 1);
-        console.log(res);
       })
-      .catch((e) => console.error(e));
+      .catch((e) => console.error(e))
+      .finally(() =>
+        setTimeout(() => {
+          setCheck(false);
+        }, 1000)
+      );
   };
   const displayStatus = (status) => {
     let color = "";
@@ -73,7 +82,6 @@ const Table = ({ data, setTemp }) => {
       </div>
     );
   };
-
   const deleteNote = async (id) => {
     const config = {
       url: `${process.env.REACT_APP_BACKEND_LINK}/application/rem`,
@@ -92,7 +100,7 @@ const Table = ({ data, setTemp }) => {
       .catch((e) => console.error(e));
   };
   const border = (index) => {
-    return index === data.length - 1 ? "" : "border-b";
+    return index === data.length - 1 ? "" : "border-b border-indigo-950";
   };
 
   return (
@@ -110,10 +118,12 @@ const Table = ({ data, setTemp }) => {
         </thead>
         <tbody>
           {data.map((item, index) => (
-            <tr className="bg-white" key={index}>
+            <tr className="bg-sky-200" key={index}>
               <td
                 className={`py-2 px-4  ${
-                  index === data.length - 1 ? "rounded-bl-lg" : "border-b"
+                  index === data.length - 1
+                    ? "rounded-bl-lg"
+                    : "border-b border-indigo-950"
                 }`}
               >
                 {item.companyName}
@@ -121,18 +131,31 @@ const Table = ({ data, setTemp }) => {
               <td className={`py-2 px-4 ${border(index)} `}>{item.jobRole}</td>
               <td className={`py-2 px-4 ${border(index)} `}>{item.platform}</td>
               <td className={`py-2 px-4 ${border(index)} `}>
-                {item._id === idupdateStatus ? (
-                  <select
-                    value={updatedStatus}
-                    onChange={(e) => setNewStatus(e.target.value)}
-                    className="rounded w-32"
-                  >
-                    {statusOptions.map((status) => (
-                      <option value={status.label}>{status.label}</option>
-                    ))}
-                  </select>
+                {!check ? (
+                  item._id === idupdateStatus ? (
+                    <select
+                      value={updatedStatus}
+                      onChange={(e) => setNewStatus(e.target.value)}
+                      className="rounded w-32"
+                    >
+                      {statusOptions.map((status) => (
+                        <option value={status.label}>{status.label}</option>
+                      ))}
+                    </select>
+                  ) : (
+                    displayStatus(item.status)
+                  )
                 ) : (
-                  displayStatus(item.status)
+                  <ThreeDots
+                    visible={true}
+                    height="24"
+                    width="30"
+                    color="#000000"
+                    radius="4"
+                    ariaLabel="three-dots-loading"
+                    wrapperStyle={{}}
+                    wrapperClass="p-0 m-0 w-32"
+                  />
                 )}
               </td>
               <td className={`py-2 px-4 ${border(index)} `}>
@@ -140,7 +163,9 @@ const Table = ({ data, setTemp }) => {
               </td>
               <td
                 className={`py-2 px-4 text-center ${
-                  index === data.length - 1 ? "rounded-br-lg" : " border-b"
+                  index === data.length - 1
+                    ? "rounded-br-lg"
+                    : " border-b border-indigo-950"
                 }`}
               >
                 <div className="flex justify-between gap-4 md:gap-0">
@@ -156,10 +181,7 @@ const Table = ({ data, setTemp }) => {
                     <FaEdit
                       className="text-blue-500 hover:text-blue-700 mx-1 cursor-pointer"
                       size={25}
-                      onClick={() =>
-                        // setEditIndex(index)
-                        setIdStatus(item._id)
-                      }
+                      onClick={() => setIdStatus(item._id)}
                     />
                   )}
                   <FaTrash

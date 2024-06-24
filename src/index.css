@@ -5,9 +5,14 @@
 @import url("https://fonts.googleapis.com/css2?family=Covered+By+Your+Grace&family=Bangers&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
 
 .covered {
   font-family: "Covered By Your Grace", cursive;
+}
+
+.bebas {
+  font-family: "Bebas Neue", sans-serif;
 }
 
 .manrope {

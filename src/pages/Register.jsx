@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useAuth } from "../components/AuthContext";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { Hourglass } from "react-loader-spinner";
 
 const Register = ({ setActiveTab }) => {
   const [name, setName] = useState("");
@@ -10,10 +11,12 @@ const Register = ({ setActiveTab }) => {
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState(false);
   const [errorMsg, setErrorMsg] = useState(null);
+  const [registering, setRegister] = useState(false);
   const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    setRegister(true);
     const config = {
       url: `${process.env.REACT_APP_BACKEND_LINK}/auth/register`,
       method: "post",
@@ -25,7 +28,6 @@ const Register = ({ setActiveTab }) => {
     };
     axios(config)
       .then((res) => {
-        console.log(res.data);
         setSuccess(true);
         setError(false);
         setTimeout(() => {
@@ -36,6 +38,9 @@ const Register = ({ setActiveTab }) => {
         setError(true);
         setSuccess(false);
         setErrorMsg(e.response.data.message);
+      })
+      .finally(() => {
+        setRegister(false);
       });
   };
 
@@ -95,21 +100,36 @@ const Register = ({ setActiveTab }) => {
               required
             />
           </div>
-          <button
-            type="submit"
-            className="px-4 py-2 font-semibold text-white bg-indigo-950 rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 w-fit block mx-auto"
-          >
-            Submit
-          </button>
+          {registering ? (
+            <div className="flex items-center gap-2 justify-center px-4 py-2">
+              <span className="text-md font-semibold">Resgistering</span>
+              <Hourglass
+                visible={true}
+                height="25"
+                width="25"
+                ariaLabel="hourglass-loading"
+                wrapperStyle={{}}
+                wrapperClass=""
+                colors={["#306cce", "#72a1ed"]}
+              />
+            </div>
+          ) : (
+            <button
+              type="submit"
+              className="px-4 py-2 font-semibold text-white bg-indigo-950 rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 w-fit block mx-auto"
+            >
+              Submit
+            </button>
+          )}
         </form>
         {success && (
-          <p className="text-md text-green-500 font-semibold text-center">
+          <p className="font-md font-semibold text-white text-center bg-green-500 w-fit mx-auto p-1 px-2 rounded-full">
             Successfully Registered!
           </p>
         )}
         {error && (
-          <p className="text-md text-red-500 font-semibold text-center">
-            {errorMsg}
+          <p className="font-md font-semibold text-white text-center bg-red-500 w-fit mx-auto p-1 px-2 rounded-full">
+            {errorMsg}!
           </p>
         )}
         <div className="text-center">

@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import axios from "axios";
+import { Hourglass } from "react-loader-spinner";
 
 const ResumeForm = ({ setTemp, setForm }) => {
   const {
@@ -9,36 +10,41 @@ const ResumeForm = ({ setTemp, setForm }) => {
     formState: { errors },
   } = useForm();
 
+  const [uploading, setUploading] = useState(false);
+  const [success, setSuccess] = useState(false);
+
   const onSubmit = async (data) => {
+    setUploading(true);
     const formData = new FormData();
     formData.append("role", data.role);
     formData.append("file", data.file[0]);
 
-    try {
-      const response = await axios.post(
-        `${process.env.REACT_APP_BACKEND_LINK}/resume/add`,
-        formData,
-        {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-          withCredentials: true,
-        }
-      );
-      setTemp((p) => p + 1);
-      setTimeout(() => {
-        setForm(false);
-      }, 1500);
-    } catch (error) {
-      console.error("Error uploading the resume:", error);
-    }
+    const config = {
+      url: `${process.env.REACT_APP_BACKEND_LINK}/resume/add`,
+      method: "post",
+      data: formData,
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+      withCredentials: true,
+    };
+    axios(config)
+      .then(() => {
+        setUploading(false);
+        setSuccess(true);
+        setTemp((p) => p + 1);
+        setTimeout(() => {
+          setForm(false);
+        }, 1500);
+      })
+      .catch((error) => console.error("Error uploading the resume:", error));
   };
 
   return (
     <div className="max-w-md mx-auto mt-10">
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="bg-white p-6 rounded shadow-md"
+        className="bg-sky-100 p-6 rounded shadow-md"
       >
         <div className="mb-4">
           <label className="block text-gray-700 font-bold mb-2" htmlFor="role">
@@ -58,14 +64,14 @@ const ResumeForm = ({ setTemp, setForm }) => {
         </div>
 
         <div className="mb-4">
-          <label className="block text-gray-700 font-bold mb-2" htmlFor="file">
+          <label className="block text-gray-700  font-bold mb-2" htmlFor="file">
             Upload Resume
           </label>
           <input
             id="file"
             type="file"
             {...register("file", { required: "File is required" })}
-            className={`shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 focus:outline-none focus:ring-1 focus:ring-indigo-950 focus:ring-offset ${
+            className={`shadow appearance-none border rounded w-full py-2 px-3 bg-white text-gray-700 focus:outline-none focus:ring-1 focus:ring-indigo-950 focus:ring-offset ${
               errors.file ? "border-red-500" : ""
             }`}
           />
@@ -82,6 +88,25 @@ const ResumeForm = ({ setTemp, setForm }) => {
             Add Resume
           </button>
         </div>
+        {uploading && (
+          <div className="flex items-center gap-2 mt-4 justify-center">
+            <span className="text-md font-semibold">Uploading Resume</span>
+            <Hourglass
+              visible={true}
+              height="25"
+              width="25"
+              ariaLabel="hourglass-loading"
+              wrapperStyle={{}}
+              wrapperClass=""
+              colors={["#306cce", "#72a1ed"]}
+            />
+          </div>
+        )}
+        {success && (
+          <p className="mt-4 text-green-500 font-semibold text-center">
+            Resume Uploaded!
+          </p>
+        )}
       </form>
     </div>
   );

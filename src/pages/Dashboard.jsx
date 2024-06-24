@@ -8,10 +8,10 @@ import Tabs from "./Tabs";
 
 const Dashboard = () => {
   const { authUser, isLoading } = useAuth();
-  const [loader, setLoader] = useState(true);
-  setTimeout(() => {
-    setLoader(false);
-  }, 1500);
+  const [loader, setLoader] = useState(false);
+  // setTimeout(() => {
+  //   setLoader(false);
+  // }, 1500);
   const [activeTab, setActiveTab] = useState(0);
 
   const tabs = [
@@ -28,7 +28,7 @@ const Dashboard = () => {
       ) : (
         <>
           <Navbar />
-          <div className="lg:flex min-h-screen bg-sky-200">
+          <div className="lg:flex min-h-screen bg-white">
             <div className="lg:w-2/3 h-full">
               <Tabs
                 tabs={tabs}

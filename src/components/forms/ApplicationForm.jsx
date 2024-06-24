@@ -49,28 +49,27 @@ const ApplicationForm = ({ setTemp, setForm }) => {
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="mx-2 md:mx-16  p-6 bg-white shadow-md rounded-md mt-4"
+      className="mx-2 md:mx-16  p-6 bg-sky-100 shadow-md rounded-md mt-4"
     >
-      <div className="mb-4 md:flex items-center">
-        <label
-          htmlFor="companyName"
-          className="block text-gray-700 font-bold mb-2  md:w-2/5"
-        >
-          Company Name
-        </label>
-        <input
-          type="text"
-          id="companyName"
-          {...register("companyName", { required: "Company name is required" })}
-          className={`shadow appearance-none border rounded w-full py-2 px-3 text-gray-700  focus:outline-blue-500 ${
-            errors.companyName ? "border-red-500" : ""
-          }`}
-        />
-        {errors.companyName && (
-          <span className="text-red-500 text-sm">
-            {errors.companyName.message}
-          </span>
-        )}
+      <div className="mb-4 ">
+        <div className="md:flex items-center">
+          <label
+            htmlFor="companyName"
+            className="block text-gray-700 font-bold mb-2  md:w-2/5"
+          >
+            Company Name
+          </label>
+          <input
+            type="text"
+            id="companyName"
+            {...register("companyName", {
+              required: "Company name is required",
+            })}
+            className={`shadow appearance-none border rounded w-full py-2 px-3 text-gray-700  focus:outline-blue-500 ${
+              errors.companyName ? "border-red-500" : ""
+            }`}
+          />
+        </div>
       </div>
 
       <div className="mb-4 md:flex items-center">
@@ -88,9 +87,6 @@ const ApplicationForm = ({ setTemp, setForm }) => {
             errors.jobRole ? "border-red-500" : ""
           }`}
         />
-        {errors.jobRole && (
-          <span className="text-red-500 text-sm">{errors.jobRole.message}</span>
-        )}
       </div>
 
       <div className="mb-4 md:flex items-center">
@@ -108,11 +104,6 @@ const ApplicationForm = ({ setTemp, setForm }) => {
             errors.platform ? "border-red-500" : ""
           }`}
         />
-        {errors.platform && (
-          <span className="text-red-500 text-sm">
-            {errors.platform.message}
-          </span>
-        )}
       </div>
 
       <div className="mb-4 md:flex items-center">
@@ -141,11 +132,6 @@ const ApplicationForm = ({ setTemp, setForm }) => {
             Today
           </button>
         </div>
-        {errors.dateApplied && (
-          <span className="text-red-500 text-sm">
-            {errors.dateApplied.message}
-          </span>
-        )}
       </div>
 
       <div className="mb-4 md:flex items-center">
@@ -169,11 +155,16 @@ const ApplicationForm = ({ setTemp, setForm }) => {
             </option>
           ))}
         </select>
-        {errors.status && (
-          <span className="text-red-500 text-sm">{errors.status.message}</span>
-        )}
       </div>
-
+      {(errors.companyName ||
+        errors.jobRole ||
+        errors.platform ||
+        errors.status ||
+        errors.dateApplied) && (
+        <div className="text-red-500 text-sm text-center my-2">
+          Please fill all the details
+        </div>
+      )}
       <div className="flex items-center justify-center">
         <button
           type="submit"
@@ -182,6 +173,7 @@ const ApplicationForm = ({ setTemp, setForm }) => {
           Submit
         </button>
       </div>
+
       {success && (
         <p className="text-green-500 font-semibold text-center mt-4">
           Application added successfully!{" "}

@@ -1,12 +1,10 @@
 import React from "react";
 import { Route, Routes, BrowserRouter } from "react-router-dom";
 import Register from "./pages/Register";
-import Login from "./pages/Login";
-import Navbar from "./components/Navbar";
+import "react-toastify/dist/ReactToastify.css";
 import Dashboard from "./pages/Dashboard";
 import ProtectedRoute from "./components/ProtectedRoute";
 import { AuthProvider } from "./components/AuthContext";
-import Tabs from "./pages/Tabs";
 import Home from "./pages/Home";
 
 function App() {

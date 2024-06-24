@@ -70,11 +70,11 @@ const Notes = () => {
 
   return (
     <>
-      <div className="bg-[#02182B] p-6 py-5 h-full">
+      <div className="p-6 py-5 h-full bg-yellow-900">
         <div className="flex items-center justify-between">
           <div className="flex gap-2">
             <FaNoteSticky size={35} color="#FFDB58" />
-            <p className="text-[#FFDB58] text-3xl font-semibold">Notes</p>
+            <p className="text-[#FFDB58] text-4xl font-semibold bebas tracking-wide">Notes</p>
           </div>
           {isForm ? (
             <RiCloseCircleLine

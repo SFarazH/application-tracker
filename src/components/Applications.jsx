@@ -30,9 +30,9 @@ const Applications = () => {
   }, [temp]);
 
   return (
-    <div className="p-4 py-2">
+    <div className="p-4 py-2 mt-4">
       <div className="flex justify-between items-center">
-        <p className="text-black text-2xl font-semibold">Applications</p>
+        <p className="text-black text-5xl font-semibold bebas tracking-wide">Applications</p>
         {isForm ? (
           <IoCloseCircle
             size={40}
