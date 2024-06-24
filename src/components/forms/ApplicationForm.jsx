@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
+import { Hourglass } from "react-loader-spinner";
 
 const statusOptions = [
   { value: "Applied", label: "Applied" },
@@ -13,6 +14,7 @@ const statusOptions = [
 
 const ApplicationForm = ({ setTemp, setForm }) => {
   const [success, setSuccess] = useState(false);
+  const [uploading, setUploading] = useState(false);
   const {
     register,
     handleSubmit,
@@ -21,6 +23,7 @@ const ApplicationForm = ({ setTemp, setForm }) => {
   } = useForm();
 
   const addApplication = async (data) => {
+    setUploading(true);
     const config = {
       url: `${process.env.REACT_APP_BACKEND_LINK}/application/add`,
       method: "post",
@@ -35,10 +38,11 @@ const ApplicationForm = ({ setTemp, setForm }) => {
           setForm(false);
         }, 1500);
       })
-      .catch((e) => console.error(e));
+      .catch((e) => console.error(e))
+      .finally(() => setUploading(false));
   };
   const setTodayDate = () => {
-    const today = new Date().toISOString().split("T")[0]; // Format the date as YYYY-MM-DD
+    const today = new Date().toISOString().split("T")[0];
     setValue("dateApplied", today);
   };
 
@@ -173,6 +177,21 @@ const ApplicationForm = ({ setTemp, setForm }) => {
           Submit
         </button>
       </div>
+
+      {uploading && (
+        <div className="flex items-center gap-2 mt-4 justify-center">
+          <span className="text-md font-semibold">Uploading Application</span>
+          <Hourglass
+            visible={true}
+            height="25"
+            width="25"
+            ariaLabel="hourglass-loading"
+            wrapperStyle={{}}
+            wrapperClass=""
+            colors={["#306cce", "#72a1ed"]}
+          />
+        </div>
+      )}
 
       {success && (
         <p className="text-green-500 font-semibold text-center mt-4">
