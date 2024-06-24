@@ -24,7 +24,7 @@ const Navbar = () => {
 
       <Menu as="div" className="relative">
         <div>
-          <MenuButton className="w-16 md:w-fit bg-transparent">
+          <MenuButton className="w-16 md:w-fit bg-transparent focus:outline-none">
             <MinidenticonImg
               username={authUser.name}
               saturation="80"
