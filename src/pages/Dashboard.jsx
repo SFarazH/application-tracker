@@ -28,7 +28,7 @@ const Dashboard = () => {
       ) : (
         <>
           <Navbar />
-          <div className="lg:flex min-h-screen bg-white">
+          <div className="lg:flex min-h-screen bg-white poppins">
             <div className="lg:w-2/3 h-full">
               <Tabs
                 tabs={tabs}

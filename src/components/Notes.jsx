@@ -78,7 +78,7 @@ const Notes = () => {
 
   return (
     <>
-      <div className="p-6 py-5 h-full bg-yellow-900">
+      <div className="p-6 py-5 h-full bg-yellow-900 min-h-[50vh]">
         <div className="flex items-center justify-between">
           <div className="flex gap-2">
             <FaNoteSticky size={35} color="#FFDB58" />

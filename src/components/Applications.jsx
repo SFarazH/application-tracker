@@ -30,9 +30,11 @@ const Applications = () => {
   }, [temp]);
 
   return (
-    <div className="p-4 py-2 mt-4">
+    <div className="p-4 py-2 mt-4 min-h-[50vh]">
       <div className="flex justify-between items-center">
-        <p className="text-black text-5xl font-semibold bebas tracking-wide">Applications</p>
+        <p className="text-black text-4xl md:text-5xl font-semibold bebas tracking-wide">
+          Applications
+        </p>
         {isForm ? (
           <IoCloseCircle
             size={40}
@@ -59,8 +61,12 @@ const Applications = () => {
         <div className="flex justify-center mt-4">
           <Spinner />
         </div>
-      ) : (
+      ) : applications.length > 0 ? (
         <Table data={applications} setTemp={setTemp} />
+      ) : (
+        <p className="text-4xl font-semibold text-center economica mt-8 md:mt-0">
+          No applications found :(
+        </p>
       )}
     </div>
   );
