@@ -131,7 +131,7 @@ const Notes = () => {
               </div>
               <button
                 type="submit"
-                className=" px-4 py-2 font-semibold text-white bg-[#02182B] hover:bg-[#003461] rounded-md focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:ring-offset-2 w-fit block mx-auto"
+                className="px-4 py-2 font-medium text-white bg-[#003461] hover:bg-[#0055A0] rounded-md focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:ring-offset-2 w-fit block mx-auto duration-100"
               >
                 Add
               </button>

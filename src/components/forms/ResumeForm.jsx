@@ -83,7 +83,7 @@ const ResumeForm = ({ setTemp, setForm }) => {
         <div className="flex items-center justify-between">
           <button
             type="submit"
-            className="bg-indigo-950 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:ring-2 focus:ring-indigo-950 focus:ring-offset-1 mx-auto"
+            className="px-4 py-2 font-medium text-white bg-[#003461] hover:bg-[#0055A0] rounded-md focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:ring-offset-2 w-fit block mx-auto duration-100"
           >
             Add Resume
           </button>

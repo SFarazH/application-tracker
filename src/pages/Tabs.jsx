@@ -3,7 +3,7 @@ import React from "react";
 const Tabs = ({ tabs, activeTab, setActiveTab }) => {
   return (
     <div className="">
-      <div className="flex border-gray-200 mx-4 pt-4 gap-4 bebas tracking-wider">
+      <div className="flex border-gray-200 mx-4 pt-4 gap-4 mclaren">
         {tabs.map((tab, index) => (
           <button
             key={index}
