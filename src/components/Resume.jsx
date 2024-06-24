@@ -1,12 +1,10 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { FaFilePdf } from "react-icons/fa";
 import { ImCross } from "react-icons/im";
 import ResumeForm from "./forms/ResumeForm";
 import { IoAddCircle, IoCloseCircle } from "react-icons/io5";
 import Spinner from "./Spinner";
-import { Hourglass, ThreeDots } from "react-loader-spinner";
-import { ToastContainer, toast } from "react-toastify";
+import { ThreeDots } from "react-loader-spinner";
 import "react-toastify/dist/ReactToastify.css";
 
 const Resume = () => {
@@ -111,7 +109,7 @@ const Resume = () => {
         <div className="flex justify-center mt-4">
           <Spinner />
         </div>
-      ) : (
+      ) : resumes.length > 0 ? (
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-4">
           {resumes?.map((resume) => (
             <div
@@ -133,6 +131,10 @@ const Resume = () => {
             </div>
           ))}
         </div>
+      ) : (
+        <p className="text-2xl font-semibold text-center">
+          No resumes found :(
+        </p>
       )}
 
       {opening && (
