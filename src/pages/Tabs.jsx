@@ -8,9 +8,9 @@ const Tabs = ({ tabs, activeTab, setActiveTab }) => {
           <button
             key={index}
             onClick={() => setActiveTab(index)}
-            className={`flex-1 p-4 py-2 text-center transition duration-300 text-xl font-semibold rounded-full focus:outline-none  ${
+            className={`flex-1 p-4 py-2 text-center transition duration-300 text-xl font-semibold rounded-full focus:outline-none ${
               activeTab === index
-                ? " bg-indigo-950 text-white rounded-full"
+                ? " bg-[#02182B] text-white rounded-full"
                 : "bg-transparent"
             }`}
           >

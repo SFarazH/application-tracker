@@ -19,7 +19,7 @@ const Dashboard = () => {
     <div>
       <>
         <Navbar />
-        <div className="lg:flex min-h-screen bg-white poppins">
+        <div className="lg:flex min-h-screen bg-[#F0FFFF] poppins">
           <div className="lg:w-2/3 h-full">
             <Tabs
               tabs={tabs}
@@ -27,7 +27,7 @@ const Dashboard = () => {
               setActiveTab={setActiveTab}
             />
           </div>
-          <div className="lg:w-1/3">
+          <div className="lg:w-1/3 border-l-0 lg:border-l border-[#02182B]">
             <Notes />
           </div>
         </div>

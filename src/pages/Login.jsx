@@ -4,7 +4,6 @@ import { useNavigate } from "react-router-dom";
 import { Hourglass } from "react-loader-spinner";
 import axios from "axios";
 
-
 const Login = ({ setActiveTab }) => {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
@@ -55,7 +54,7 @@ const Login = ({ setActiveTab }) => {
 
   return (
     <div className="flex items-center justify-center mt-4">
-      <div className="w-full max-w-md p-8 space-y-8 bg-blue-300 rounded">
+      <div className="w-full max-w-md p-8 space-y-8 bg-blue-200 rounded">
         <h2 className="text-2xl font-bold text-center">Login</h2>
         <form onSubmit={handleSubmit} className="space-y-6">
           <div>
@@ -110,9 +109,9 @@ const Login = ({ setActiveTab }) => {
           ) : (
             <button
               type="submit"
-              className="px-4 py-2 font-semibold text-white bg-indigo-950 rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 w-fit block mx-auto"
+              className="px-4 py-2 font-semibold text-white bg-[#02182B] hover:bg-[#003461] rounded-md focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:ring-offset-2 w-fit block mx-auto"
             >
-              Submit
+              Login
             </button>
           )}
           {error && (

@@ -64,7 +64,7 @@ const Applications = () => {
       ) : applications.length > 0 ? (
         <Table data={applications} setTemp={setTemp} />
       ) : (
-        <p className="text-4xl font-semibold text-center economica mt-8 md:mt-0">
+        <p className="text-3xl md:text-4xl font-semibold text-center economica mt-8 md:mt-0">
           No applications found :(
         </p>
       )}

@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { FaNoteSticky, FaTrash } from "react-icons/fa6";
+import { IoAddCircle, IoCloseCircle } from "react-icons/io5";
 
 import { RiAddCircleLine, RiCloseCircleLine } from "react-icons/ri";
 import { Hourglass, ThreeDots } from "react-loader-spinner";
@@ -77,27 +78,32 @@ const Notes = () => {
 
   return (
     <>
-      <div className="p-6 py-5 h-full bg-yellow-900 min-h-[50vh]">
+      <div className="p-6 py-5 h-full bg-[#FFFFF0] min-h-[50vh]">
         <div className="flex items-center justify-between">
           <div className="flex gap-2">
-            <FaNoteSticky size={35} color="#FFDB58" />
-            <p className="text-[#FFDB58] text-4xl font-semibold bebas tracking-wide">
+            <FaNoteSticky size={35} color="#007BA7" />
+            {/* 5f65d4 */}
+            <p className="text-[#007BA7] text-4xl font-semibold bebas tracking-wide">
               Notes
             </p>
           </div>
           {isForm ? (
-            <RiCloseCircleLine
-              size={30}
+            <IoCloseCircle
+              size={35}
               color="red"
+              onClick={() => {
+                setForm(false);
+              }}
               className="cursor-pointer"
-              onClick={() => setForm(false)}
             />
           ) : (
-            <RiAddCircleLine
-              size={30}
+            <IoAddCircle
+              size={35}
               color="green"
+              onClick={() => {
+                setForm(true);
+              }}
               className="cursor-pointer"
-              onClick={() => setForm(true)}
             />
           )}
         </div>
@@ -107,31 +113,31 @@ const Notes = () => {
               <div className="mb-4">
                 <label
                   htmlFor="noteTextarea"
-                  className="block text-white font-semibold text-lg mb-2"
+                  className="block text-black font-semibold text-lg mb-2"
                 >
                   Add Note
                 </label>
                 <textarea
                   id="noteTextarea"
                   rows={2}
-                  className={`w-full p-2 rounded focus:outline-blue-600`}
+                  className={`w-full p-2 rounded focus:outline-blue-600 border border-[#02182B]`}
                   {...register("note", { required: "Note cannot be empty" })}
                 />
                 {errors.note && (
-                  <p className="text-[#FFDB58] text-md mt-1 font-bold ">
+                  <p className="text-black text-md mt-1 font-bold ">
                     {errors.note.message} !
                   </p>
                 )}
               </div>
               <button
                 type="submit"
-                className=" bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-blue-600"
+                className=" px-4 py-2 font-semibold text-white bg-[#02182B] hover:bg-[#003461] rounded-md focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:ring-offset-2 w-fit block mx-auto"
               >
                 Add
               </button>
               {uploading && (
-                <div className="flex items-center gap-2 mt-4 justify-center">
-                  <span className="text-white text-md font-semibold">
+                <div className="flex items-center gap-2 pt-4 justify-center">
+                  <span className="text-[#007BA7] text-md font-semibold">
                     Uploading Note
                   </span>
                   <Hourglass
@@ -141,7 +147,7 @@ const Notes = () => {
                     ariaLabel="hourglass-loading"
                     wrapperStyle={{}}
                     wrapperClass=""
-                    colors={["#FFDB58", "#FFDB58"]}
+                    colors={["#007BA7", "#007BA7"]}
                   />
                 </div>
               )}
@@ -153,13 +159,13 @@ const Notes = () => {
               {notes.map((note) => (
                 <>
                   <div
-                    className="flex justify-between bg-[#fcf5c7] p-2 rounded-lg"
+                    className="flex justify-between bg-[#007BA7] p-2 rounded-lg border-[#02182B]"
                     key={note.noteId}
                   >
-                    <p className="text-md">{note.note}</p>{" "}
+                    <p className="text-md text-white">{note.note}</p>{" "}
                     <FaTrash
                       className="flex-shrink-0 cursor-pointer"
-                      color="red"
+                      color="#FDEE00"
                       size={20}
                       onClick={() => deleteNote(note.noteId)}
                     />
@@ -168,14 +174,14 @@ const Notes = () => {
               ))}
               {deleting && (
                 <div className="mt-2 flex gap-4 items-center">
-                  <p className="text-md font-medium text-amber-200">
+                  <p className="text-md font-semibold text-[#007BA7]">
                     Deleting note{" "}
                   </p>
                   <ThreeDots
                     visible={true}
                     height="40"
                     width="40"
-                    color="#FFE082"
+                    color="#007BA7"
                     radius="4"
                     ariaLabel="three-dots-loading"
                     wrapperStyle={{}}

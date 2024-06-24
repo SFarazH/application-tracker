@@ -131,7 +131,7 @@ const ApplicationForm = ({ setTemp, setForm }) => {
           <button
             type="button"
             onClick={setTodayDate}
-            className="bg-blue-500 shadow text-white px-3 py-1 rounded-r font-semibold"
+            className="bg-[#003461] shadow text-white px-3 py-1 rounded-r font-semibold"
           >
             Today
           </button>
@@ -172,9 +172,9 @@ const ApplicationForm = ({ setTemp, setForm }) => {
       <div className="flex items-center justify-center">
         <button
           type="submit"
-          className="bg-blue-500  hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-blue-800"
+          className="px-4 py-2 font-medium text-white bg-[#02182B] hover:bg-[#003461] rounded-md focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:ring-offset-2 w-fit block mx-auto"
         >
-          Submit
+          Add
         </button>
       </div>
 

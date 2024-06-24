@@ -49,7 +49,7 @@ const Home = () => {
             />
           </div>
         </div>
-        <div className="lg:w-2/5 h-fit md:max-w-lg mx-auto bg-blue-300 rounded-xl pt-5 mb-5">
+        <div className="lg:w-2/5 h-fit md:max-w-lg mx-auto bg-blue-200 rounded-xl pt-5 mb-5 poppins">
           <Tabs tabs={tabs} activeTab={activeTab} setActiveTab={setActiveTab} />
         </div>
       </div>

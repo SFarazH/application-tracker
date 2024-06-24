@@ -107,7 +107,7 @@ const Table = ({ data, setTemp }) => {
     <div className="overflow-x-auto mt-4">
       <table className="w-full table-auto rounded-lg">
         <thead>
-          <tr className="text-left bg-blue-500 text-white font-normal">
+          <tr className="text-left bg-[#02182B] text-white font-normal">
             <th className="py-2 px-4 rounded-tl-lg">Company</th>
             <th className="py-2 px-4">Job Role</th>
             <th className="py-2 px-4">Platform</th>

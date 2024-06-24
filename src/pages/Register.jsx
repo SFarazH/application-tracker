@@ -10,7 +10,6 @@ const Register = ({ setActiveTab }) => {
   const [error, setError] = useState(false);
   const [errorMsg, setErrorMsg] = useState(null);
   const [registering, setRegister] = useState(false);
-  
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -44,7 +43,7 @@ const Register = ({ setActiveTab }) => {
 
   return (
     <div className="flex items-center justify-center mt-4">
-      <div className="w-full max-w-md p-8 space-y-8 bg-blue-300 rounded">
+      <div className="w-full max-w-md p-8 space-y-8 bg-blue-200 rounded">
         <h2 className="text-2xl font-bold text-center">Register</h2>
         <form onSubmit={handleSubmit} className="space-y-6">
           <div>
@@ -114,9 +113,9 @@ const Register = ({ setActiveTab }) => {
           ) : (
             <button
               type="submit"
-              className="px-4 py-2 font-semibold text-white bg-indigo-950 rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 w-fit block mx-auto"
+              className="px-4 py-2 font-semibold text-white bg-[#02182B] hover:bg-[#003461] rounded-md focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:ring-offset-2 w-fit block mx-auto"
             >
-              Submit
+              Register
             </button>
           )}
         </form>
