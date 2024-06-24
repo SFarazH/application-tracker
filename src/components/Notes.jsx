@@ -159,10 +159,12 @@ const Notes = () => {
               {notes.map((note) => (
                 <>
                   <div
-                    className="flex justify-between bg-[#007BA7] p-2 rounded-lg border-[#02182B]"
+                    className="flex overflow-x-auto justify-between bg-[#007BA7] p-2 rounded-lg border-[#02182B]"
                     key={note.noteId}
                   >
-                    <p className="text-md text-white">{note.note}</p>{" "}
+                    <span className="text-md text-white break-words whitespace-normal">
+                      {note.note}
+                    </span>{" "}
                     <FaTrash
                       className="flex-shrink-0 cursor-pointer"
                       color="#FDEE00"
