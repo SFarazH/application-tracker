@@ -5,11 +5,14 @@ import { useForm } from "react-hook-form";
 import { FaNoteSticky, FaTrash } from "react-icons/fa6";
 
 import { RiAddCircleLine, RiCloseCircleLine } from "react-icons/ri";
+import { Hourglass, ThreeDots } from "react-loader-spinner";
 
 const Notes = () => {
   const [isForm, setForm] = useState(false);
   const [notes, setNotes] = useState([]);
   const [temp, setTemp] = useState(0);
+  const [uploading, setUploading] = useState(false);
+  const [deleting, setDeleting] = useState(false);
 
   const {
     register,
@@ -19,17 +22,23 @@ const Notes = () => {
   } = useForm();
 
   const addNote = async (note) => {
+    setUploading(true);
     const config = {
       url: `${process.env.REACT_APP_BACKEND_LINK}/note/add`,
       method: "post",
       data: { note },
       withCredentials: true,
     };
-    axios(config).then((res) => {
-      console.log(res);
-      setForm(false);
-      setTemp((p) => p + 1);
-    });
+    axios(config)
+      .then((res) => {
+        setForm(false);
+        setTemp((p) => p + 1);
+      })
+      .catch((e) => console.error(e))
+      .finally(() => {
+        setUploading(false);
+        reset();
+      });
   };
 
   const getNotes = async () => {
@@ -44,6 +53,7 @@ const Notes = () => {
   };
 
   const deleteNote = async (id) => {
+    setDeleting(true);
     const config = {
       url: `${process.env.REACT_APP_BACKEND_LINK}/note/delete`,
       method: "delete",
@@ -52,10 +62,10 @@ const Notes = () => {
     };
     axios(config)
       .then((res) => {
-        console.log(res);
         setTemp((p) => p - 1);
       })
-      .catch((e) => console.error(e));
+      .catch((e) => console.error(e))
+      .finally(() => setDeleting(false));
   };
 
   useEffect(() => {
@@ -63,9 +73,7 @@ const Notes = () => {
   }, [temp]);
 
   const onSubmit = (data) => {
-    console.log(data);
     addNote(data.note);
-    reset();
   };
 
   return (
@@ -74,7 +82,9 @@ const Notes = () => {
         <div className="flex items-center justify-between">
           <div className="flex gap-2">
             <FaNoteSticky size={35} color="#FFDB58" />
-            <p className="text-[#FFDB58] text-4xl font-semibold bebas tracking-wide">Notes</p>
+            <p className="text-[#FFDB58] text-4xl font-semibold bebas tracking-wide">
+              Notes
+            </p>
           </div>
           {isForm ? (
             <RiCloseCircleLine
@@ -120,6 +130,22 @@ const Notes = () => {
               >
                 Add
               </button>
+              {uploading && (
+                <div className="flex items-center gap-2 mt-4 justify-center">
+                  <span className="text-white text-md font-semibold">
+                    Uploading Note
+                  </span>
+                  <Hourglass
+                    visible={true}
+                    height="25"
+                    width="25"
+                    ariaLabel="hourglass-loading"
+                    wrapperStyle={{}}
+                    wrapperClass=""
+                    colors={["#FFDB58", "#FFDB58"]}
+                  />
+                </div>
+              )}
             </form>
           </>
         ) : (
@@ -141,6 +167,23 @@ const Notes = () => {
                   </div>
                 </>
               ))}
+              {deleting && (
+                <div className="mt-2 flex gap-4 items-center">
+                  <p className="text-md font-medium text-amber-200">
+                    Deleting note{" "}
+                  </p>
+                  <ThreeDots
+                    visible={true}
+                    height="40"
+                    width="40"
+                    color="#FFE082"
+                    radius="4"
+                    ariaLabel="three-dots-loading"
+                    wrapperStyle={{}}
+                    wrapperClass=""
+                  />
+                </div>
+              )}
             </div>
           </>
         )}

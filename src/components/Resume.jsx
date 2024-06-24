@@ -15,6 +15,7 @@ const Resume = () => {
   const [isForm, setForm] = useState(false);
   const [opening, setOpening] = useState(false);
   const [isSpinner, setSpinner] = useState(true);
+  const [actionTxt, setActionTxt] = useState("");
 
   const getResumes = async () => {
     const config = {
@@ -31,6 +32,7 @@ const Resume = () => {
   };
 
   const openResume = async (id) => {
+    setActionTxt("Opening");
     setOpening(true);
     const config = {
       url: `${process.env.REACT_APP_BACKEND_LINK}/resume/getId`,
@@ -49,15 +51,16 @@ const Resume = () => {
         const blob = await res.data;
         const url = window.URL.createObjectURL(blob);
         window.open(url, "_blank");
-        setOpening(false);
       })
       .catch((e) => {
         console.error(e);
-        setOpening(false);
-      });
+      })
+      .finally(() => setOpening(false));
   };
 
   const deleteResume = async (id) => {
+    setActionTxt("Deleting");
+    setOpening(true);
     const config = {
       url: `${process.env.REACT_APP_BACKEND_LINK}/resume/del`,
       method: "delete",
@@ -72,7 +75,8 @@ const Resume = () => {
       })
       .catch((e) => {
         console.error(e);
-      });
+      })
+      .finally(() => setOpening(false));
   };
 
   useEffect(() => {
@@ -133,7 +137,7 @@ const Resume = () => {
 
       {opening && (
         <div className="mt-8 flex gap-4 items-center">
-          <p className="text-lg">Opening resume </p>
+          <p className="text-md font-medium">{actionTxt} resume </p>
           <ThreeDots
             visible={true}
             height="40"
