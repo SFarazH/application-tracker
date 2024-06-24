@@ -11,7 +11,7 @@ export function AuthProvider({ children }) {
   const [authUser, setAuthUser] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
 
-  const [temp, setTemp] = useState(0);
+  // const [temp, setTemp] = useState(0);
 
   const verifyUser = async () => {
     const config = {
@@ -29,7 +29,7 @@ export function AuthProvider({ children }) {
   };
   useEffect(() => {
     verifyUser();
-  }, [temp]);
+  }, []);
 
   const value = {
     authUser,

@@ -6,7 +6,7 @@ import { Menu, MenuButton, MenuItem, MenuItems } from "@headlessui/react";
 import axios from "axios";
 
 const Navbar = () => {
-  const { authUser, isLoading, setAuthUser } = useAuth();
+  const { authUser, setAuthUser } = useAuth();
   const MinidenticonImg = ({ username, saturation, lightness, ...props }) => {
     const svgURI = useMemo(
       () =>
@@ -34,9 +34,8 @@ const Navbar = () => {
 
         <MenuItems className="border-2 border-red-500 absolute w-full justify-center z-10 center rounded-full bg-white transition ease-in-out duration-100">
           <MenuItem>
-            <a
+            <button
               onClick={() => {
-                console.log("logged out");
                 const config = {
                   url: `${process.env.REACT_APP_BACKEND_LINK}/auth/logout`,
                   method: "post",
@@ -49,7 +48,7 @@ const Navbar = () => {
               className="rounded-full block text-center text-lg font-semibold w-full hover:bg-red-500 cursor-pointer hover:text-white transition ease-in-out duration-150"
             >
               logout
-            </a>
+            </button>
           </MenuItem>
         </MenuItems>
       </Menu>

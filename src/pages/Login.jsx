@@ -1,9 +1,9 @@
 import { React, useEffect, useState } from "react";
 import { useAuth } from "../components/AuthContext";
 import { useNavigate } from "react-router-dom";
-
+import { Hourglass } from "react-loader-spinner";
 import axios from "axios";
-import { Hourglass, ProgressBar } from "react-loader-spinner";
+
 
 const Login = ({ setActiveTab }) => {
   const navigate = useNavigate();

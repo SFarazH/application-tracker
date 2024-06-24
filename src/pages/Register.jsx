@@ -1,7 +1,5 @@
 import React, { useState } from "react";
-import { useAuth } from "../components/AuthContext";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
 import { Hourglass } from "react-loader-spinner";
 
 const Register = ({ setActiveTab }) => {
@@ -12,7 +10,7 @@ const Register = ({ setActiveTab }) => {
   const [error, setError] = useState(false);
   const [errorMsg, setErrorMsg] = useState(null);
   const [registering, setRegister] = useState(false);
-  const navigate = useNavigate();
+  
 
   const handleSubmit = (e) => {
     e.preventDefault();
