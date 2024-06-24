@@ -131,8 +131,19 @@ const Table = ({ data, setTemp }) => {
               <td className={`py-2 px-4 ${border(index)} `}>{item.jobRole}</td>
               <td className={`py-2 px-4 ${border(index)} `}>{item.platform}</td>
               <td className={`py-2 px-4 ${border(index)} `}>
-                {!check ? (
-                  item._id === idupdateStatus ? (
+                {item._id === idupdateStatus ? (
+                  check ? (
+                    <ThreeDots
+                      visible={true}
+                      height="24"
+                      width="30"
+                      color="#000000"
+                      radius="4"
+                      ariaLabel="three-dots-loading"
+                      wrapperStyle={{}}
+                      wrapperClass="p-0 m-0 w-32"
+                    />
+                  ) : (
                     <select
                       value={updatedStatus}
                       onChange={(e) => setNewStatus(e.target.value)}
@@ -142,20 +153,9 @@ const Table = ({ data, setTemp }) => {
                         <option value={status.label}>{status.label}</option>
                       ))}
                     </select>
-                  ) : (
-                    displayStatus(item.status)
                   )
                 ) : (
-                  <ThreeDots
-                    visible={true}
-                    height="24"
-                    width="30"
-                    color="#000000"
-                    radius="4"
-                    ariaLabel="three-dots-loading"
-                    wrapperStyle={{}}
-                    wrapperClass="p-0 m-0 w-32"
-                  />
+                  displayStatus(item.status)
                 )}
               </td>
               <td className={`py-2 px-4 ${border(index)} `}>
