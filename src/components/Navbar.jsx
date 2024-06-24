@@ -18,11 +18,13 @@ const Navbar = () => {
   };
   return (
     <div className="flex justify-between px-3 md:px-8 items-center bg-[#02182B] sticky top-0 z-50 py-1.5">
-      <p className="text-2xl md:text-5xl font-medium text-white yatra tracking-wide">Welcome {authUser.name.split(" ")[0]}!</p>
+      <p className="text-2xl md:text-5xl font-medium text-white yatra tracking-wide">
+        Welcome {authUser.name.split(" ")[0]}!
+      </p>
 
       <Menu as="div" className="relative">
         <div>
-          <MenuButton className="w-16 md:w-fit">
+          <MenuButton className="w-16 md:w-fit bg-transparent">
             <MinidenticonImg
               username={authUser.name}
               saturation="80"
@@ -32,7 +34,7 @@ const Navbar = () => {
           </MenuButton>
         </div>
 
-        <MenuItems className="border-2 border-red-500 absolute w-full justify-center z-10 center rounded-full bg-white transition ease-in-out duration-100">
+        <MenuItems className="border-2 border-red-500 absolute w-full justify-center z-10 center rounded-full bg-white transition ease-in-out duration-100 focus:outline-none">
           <MenuItem>
             <button
               onClick={() => {
