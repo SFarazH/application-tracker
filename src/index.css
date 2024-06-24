@@ -7,9 +7,24 @@
 @import url("https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Economica&family=Poppins&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=McLaren&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Peralta&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Yatra+One&display=swap");
 
 .covered {
   font-family: "Covered By Your Grace", cursive;
+}
+
+.yatra {
+  font-family: "Yatra One", system-ui;
+}
+
+.peralta {
+  font-family: "Peralta", serif;
+}
+
+.mclaren {
+  font-family: "McLaren", sans-serif;
 }
 
 .bebas {

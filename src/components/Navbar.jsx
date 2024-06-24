@@ -17,15 +17,15 @@ const Navbar = () => {
     return <img src={svgURI} alt={username} {...props} />;
   };
   return (
-    <div className="flex justify-between px-3 md:px-8 items-center bg-[#02182B] sticky top-0 z-50  ">
-      <p className="text-2xl font-bold text-white">Welcome {authUser.name.split(" ")[0]}!</p>
+    <div className="flex justify-between px-3 md:px-8 items-center bg-[#02182B] sticky top-0 z-50 py-1.5">
+      <p className="text-2xl md:text-5xl font-medium text-white yatra tracking-wide">Welcome {authUser.name.split(" ")[0]}!</p>
 
       <Menu as="div" className="relative">
         <div>
-          <MenuButton className="">
+          <MenuButton className="w-16 md:w-fit">
             <MinidenticonImg
               username={authUser.name}
-              saturation="90"
+              saturation="80"
               width="80"
               height="80"
             />
