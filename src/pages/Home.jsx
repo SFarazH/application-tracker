@@ -36,7 +36,7 @@ const Home = () => {
           <p className="text-6xl md:text-8xl font-thin luckiest flex flex-wrap justify-center mx-auto">
             <span className="lg:mr-8">Application </span> <span>Tracker</span>
           </p>
-          <p className="covered text-3xl md:text-[2.8em] mt-4 md:mt-8 text-green-500 text-center">
+          <p className="mclaren text-3xl md:text-[2.2em] mt-4 md:mt-8 text-green-500 text-center">
             One stop portal to manage all your job applications!{" "}
           </p>
           <div className="flex justify-center mt-4 md:mt-20 mb-12 items-center">

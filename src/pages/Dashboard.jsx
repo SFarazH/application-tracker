@@ -20,7 +20,7 @@ const Dashboard = () => {
       <>
         <Navbar />
         <div className="lg:flex min-h-screen bg-[#F0FFFF] poppins pt-4 md:pt-0">
-          <div className="lg:w-2/3 h-full">
+          <div className="lg:w-2/3 h-full poppins">
             <Tabs
               tabs={tabs}
               activeTab={activeTab}
