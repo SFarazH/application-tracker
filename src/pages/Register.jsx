@@ -126,7 +126,7 @@ const Register = ({ setActiveTab }) => {
         )}
         {error && (
           <p className="font-md font-medium text-white text-center bg-red-500 w-fit mx-auto p-1 px-2 rounded-full">
-            {errorMsg} !
+            {errorMsg ? errorMsg : "Internal Server Error"} !
           </p>
         )}
         <div className="text-center">
