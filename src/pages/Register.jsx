@@ -34,7 +34,7 @@ const Register = ({ setActiveTab }) => {
       .catch((e) => {
         setError(true);
         setSuccess(false);
-        setErrorMsg(e.response.data.message);
+        setErrorMsg(e.response?.data.message);
       })
       .finally(() => {
         setRegister(false);
