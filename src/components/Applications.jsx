@@ -47,7 +47,7 @@ const Applications = () => {
         ) : (
           <IoAddCircle
             size={40}
-            color="green"
+            color="#003461"
             onClick={() => {
               setForm(true);
             }}

@@ -34,7 +34,7 @@ const Navbar = () => {
           </MenuButton>
         </div>
 
-        <MenuItems className="border-2 border-red-500 absolute w-full justify-center z-10 center rounded-full bg-white transition ease-in-out duration-100 focus:outline-none">
+        <MenuItems className="border-4 border-red-500 absolute w-full justify-center z-10 center rounded-full bg-white transition ease-in-out duration-100 focus:outline-none">
           <MenuItem>
             <button
               onClick={() => {
@@ -47,7 +47,7 @@ const Navbar = () => {
                   setAuthUser(null);
                 });
               }}
-              className="rounded-full block text-center text-lg font-semibold w-full hover:bg-red-500 cursor-pointer hover:text-white transition ease-in-out duration-150"
+              className="p-1 rounded-full block text-center text-lg font-semibold w-full hover:bg-red-500 cursor-pointer hover:text-white transition ease-in-out duration-150"
             >
               logout
             </button>

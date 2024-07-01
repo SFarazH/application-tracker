@@ -3,8 +3,6 @@ import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { FaNoteSticky, FaTrash } from "react-icons/fa6";
 import { IoAddCircle, IoCloseCircle } from "react-icons/io5";
-
-import { RiAddCircleLine, RiCloseCircleLine } from "react-icons/ri";
 import { Hourglass, ThreeDots } from "react-loader-spinner";
 
 const Notes = () => {
@@ -78,12 +76,12 @@ const Notes = () => {
 
   return (
     <>
-      <div className="p-6 py-5 h-full bg-[#FFFFF0] min-h-[50vh]">
+      <div className="p-6 py-5 h-full bg-amber-50 min-h-[50vh]">
         <div className="flex items-center justify-between">
           <div className="flex gap-2">
-            <FaNoteSticky size={35} color="#007BA7" />
+            <FaNoteSticky size={35} color="#003461" />
             {/* 5f65d4 */}
-            <p className="text-[#007BA7] text-4xl font-semibold bebas tracking-wide">
+            <p className="text-[#003461] text-4xl font-semibold bebas tracking-wide">
               Notes
             </p>
           </div>
@@ -99,7 +97,7 @@ const Notes = () => {
           ) : (
             <IoAddCircle
               size={35}
-              color="green"
+              color="#003461"
               onClick={() => {
                 setForm(true);
               }}
@@ -159,15 +157,15 @@ const Notes = () => {
               {notes.map((note) => (
                 <>
                   <div
-                    className="flex overflow-x-auto justify-between bg-[#007BA7] p-2 rounded-lg border-[#02182B]"
+                    className="flex overflow-x-auto text-white justify-between bg-[#003461] p-2 rounded-lg border-[#02182B]"
                     key={note.noteId}
                   >
-                    <div className="text-md text-white break-words whitespace-pre-wrap">
+                    <div className="text-md break-words whitespace-pre-wrap">
                       {note.note}
                     </div>{" "}
                     <FaTrash
                       className="flex-shrink-0 cursor-pointer"
-                      color="#FDEE00"
+                      color="red"
                       size={20}
                       onClick={() => deleteNote(note.noteId)}
                     />
