@@ -162,9 +162,9 @@ const Notes = () => {
                     className="flex overflow-x-auto justify-between bg-[#007BA7] p-2 rounded-lg border-[#02182B]"
                     key={note.noteId}
                   >
-                    <span className="text-md text-white break-words whitespace-normal">
+                    <div className="text-md text-white break-words whitespace-pre-wrap">
                       {note.note}
-                    </span>{" "}
+                    </div>{" "}
                     <FaTrash
                       className="flex-shrink-0 cursor-pointer"
                       color="#FDEE00"

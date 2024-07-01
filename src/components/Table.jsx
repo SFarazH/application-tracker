@@ -117,85 +117,91 @@ const Table = ({ data, setTemp }) => {
           </tr>
         </thead>
         <tbody>
-          {data.map((item, index) => (
-            <tr className="bg-sky-200" key={index}>
-              <td
-                className={`py-2 px-4  ${
-                  index === data.length - 1
-                    ? "rounded-bl-lg"
-                    : "border-b border-indigo-950"
-                }`}
-              >
-                {item.companyName}
-              </td>
-              <td className={`py-2 px-4 ${border(index)} `}>{item.jobRole}</td>
-              <td className={`py-2 px-4 ${border(index)} `}>{item.platform}</td>
-              <td className={`py-2 px-4 ${border(index)} `}>
-                {item._id === idupdateStatus ? (
-                  check ? (
-                    <ThreeDots
-                      visible={true}
-                      height="24"
-                      width="30"
-                      color="#000000"
-                      radius="4"
-                      ariaLabel="three-dots-loading"
-                      wrapperStyle={{}}
-                      wrapperClass="p-0 m-0 w-32"
-                    />
-                  ) : (
-                    <select
-                      value={updatedStatus}
-                      onChange={(e) => setNewStatus(e.target.value)}
-                      className="rounded w-32"
-                    >
-                      {statusOptions.map((status) => (
-                        <option value={status.label}>{status.label}</option>
-                      ))}
-                    </select>
-                  )
-                ) : (
-                  displayStatus(item.status)
-                )}
-              </td>
-              <td className={`py-2 px-4 ${border(index)} `}>
-                {formatDate(item.dateApplied)}
-              </td>
-              <td
-                className={`py-2 px-4 text-center ${
-                  index === data.length - 1
-                    ? "rounded-br-lg"
-                    : " border-b border-indigo-950"
-                }`}
-              >
-                <div className="flex justify-between gap-4 md:gap-0">
+          {data
+            .sort((a, b) => new Date(b.dateApplied) - new Date(a.dateApplied))
+            .map((item, index) => (
+              <tr className="bg-sky-200" key={index}>
+                <td
+                  className={`py-2 px-4  ${
+                    index === data.length - 1
+                      ? "rounded-bl-lg"
+                      : "border-b border-indigo-950"
+                  }`}
+                >
+                  {item.companyName}
+                </td>
+                <td className={`py-2 px-4 ${border(index)} `}>
+                  {item.jobRole}
+                </td>
+                <td className={`py-2 px-4 ${border(index)} `}>
+                  {item.platform}
+                </td>
+                <td className={`py-2 px-4 ${border(index)} `}>
                   {item._id === idupdateStatus ? (
-                    <FaCheck
+                    check ? (
+                      <ThreeDots
+                        visible={true}
+                        height="24"
+                        width="30"
+                        color="#000000"
+                        radius="4"
+                        ariaLabel="three-dots-loading"
+                        wrapperStyle={{}}
+                        wrapperClass="p-0 m-0 w-32"
+                      />
+                    ) : (
+                      <select
+                        value={updatedStatus}
+                        onChange={(e) => setNewStatus(e.target.value)}
+                        className="rounded w-32"
+                      >
+                        {statusOptions.map((status) => (
+                          <option value={status.label}>{status.label}</option>
+                        ))}
+                      </select>
+                    )
+                  ) : (
+                    displayStatus(item.status)
+                  )}
+                </td>
+                <td className={`py-2 px-4 ${border(index)} `}>
+                  {formatDate(item.dateApplied)}
+                </td>
+                <td
+                  className={`py-2 px-4 text-center ${
+                    index === data.length - 1
+                      ? "rounded-br-lg"
+                      : " border-b border-indigo-950"
+                  }`}
+                >
+                  <div className="flex justify-between gap-4 md:gap-0">
+                    {item._id === idupdateStatus ? (
+                      <FaCheck
+                        size={25}
+                        className="text-green-500 hover:text-green-700 mx-1 cursor-pointer"
+                        onClick={() => {
+                          updateStatus(item._id);
+                        }}
+                      />
+                    ) : (
+                      <FaEdit
+                        className="text-blue-500 hover:text-blue-700 mx-1 cursor-pointer"
+                        size={25}
+                        onClick={() => setIdStatus(item._id)}
+                      />
+                    )}
+                    <FaTrash
+                      className="text-red-500 hover:text-red-700 mx-1 cursor-pointer"
                       size={25}
-                      className="text-green-500 hover:text-green-700 mx-1 cursor-pointer"
                       onClick={() => {
-                        updateStatus(item._id);
+                        setIdDelete(item._id);
+                        setOpen(true);
                       }}
                     />
-                  ) : (
-                    <FaEdit
-                      className="text-blue-500 hover:text-blue-700 mx-1 cursor-pointer"
-                      size={25}
-                      onClick={() => setIdStatus(item._id)}
-                    />
-                  )}
-                  <FaTrash
-                    className="text-red-500 hover:text-red-700 mx-1 cursor-pointer"
-                    size={25}
-                    onClick={() => {
-                      setIdDelete(item._id);
-                      setOpen(true);
-                    }}
-                  />
-                </div>
-              </td>
-            </tr>
-          ))}
+                  </div>
+                </td>
+              </tr>
+            ))}
         </tbody>
       </table>
 
