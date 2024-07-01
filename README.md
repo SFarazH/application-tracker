@@ -8,12 +8,12 @@ An application to help keep track of all of your job applications at a single pl
 
 ## Features
 
-- Feature to update job application status
-- Multiple resumes storage
-- Authentication enabled to ensure data security
-- Ease to use interface
-- Responsive Design
-- Unique icon for each user!
+- Update job application status functionality
+- Storage for multiple resumes
+- Authentication to ensure data security
+- User-friendly interface
+- Responsive design
+- Unique user icons!
 
 
 ## Screenshots
