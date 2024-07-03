@@ -32,8 +32,8 @@ const Applications = () => {
   return (
     <div className="p-4 py-2 mt-4 min-h-[50vh]">
       <div className="flex justify-between items-center">
-        <p className="text-black text-4xl md:text-5xl font-semibold bebas tracking-wide">
-          Applications
+        <p className="text-black text-4xl md:text-5xl font-semibold bebas tracking-wide flex items-center gap-4 md:gap-3">
+          Applications <span className="text-3xl md:text-4xl font-normal">({applications.length})</span>
         </p>
         {isForm ? (
           <IoCloseCircle
