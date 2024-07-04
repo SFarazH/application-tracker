@@ -226,7 +226,10 @@ const Login = ({ setActiveTab }) => {
             {forgotPass ? (
               <span
                 className="cursor-pointer text-[#003461] hover:text-[#0055A0]"
-                onClick={() => setForgotPass(false)}
+                onClick={() => {
+                  setForgotPass(false);
+                  setError(false);
+                }}
               >
                 Login
               </span>

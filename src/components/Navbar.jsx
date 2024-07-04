@@ -40,7 +40,7 @@ const Navbar = () => {
               onClick={() => {
                 Cookies.remove("accessToken", {
                   path: "/",
-                  domain: "https://application-tracker-sable.vercel.app/",
+                  domain: "application-tracker-backend-lyart.vercel.app",
                   secure: true,
                   sameSite: "None",
                 });
