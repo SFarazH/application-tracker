@@ -38,12 +38,12 @@ const Navbar = () => {
           <MenuItem>
             <button
               onClick={() => {
-                // Cookies.remove("accessToken", {
-                  // path: "/",
-                  // domain: "application-tracker-backend-lyart.vercel.app",
-                  // secure: true,
-                  // sameSite: "None",
-                // });
+                Cookies.remove("accessToken", {
+                  path: "/",
+                  domain: "https://application-tracker-sable.vercel.app/",
+                  secure: true,
+                  sameSite: "None",
+                });
                 const config = {
                   url: `${process.env.REACT_APP_BACKEND_LINK}/auth/logout`,
                   method: "post",
