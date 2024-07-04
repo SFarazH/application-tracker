@@ -1,6 +1,6 @@
 import { React, useMemo } from "react";
 import { useAuth } from "./AuthContext";
-// import img from "./consequences.png";
+import Cookies from "js-cookie";
 import { minidenticon } from "minidenticons";
 import { Menu, MenuButton, MenuItem, MenuItems } from "@headlessui/react";
 import axios from "axios";
@@ -38,6 +38,12 @@ const Navbar = () => {
           <MenuItem>
             <button
               onClick={() => {
+                Cookies.remove("accessToken", {
+                  path: "/",
+                  domain: "https://application-tracker-sable.vercel.app/",
+                  secure: true,
+                  sameSite: "None",
+                });
                 const config = {
                   url: `${process.env.REACT_APP_BACKEND_LINK}/auth/logout`,
                   method: "post",

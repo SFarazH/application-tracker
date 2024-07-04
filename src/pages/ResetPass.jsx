@@ -36,7 +36,7 @@ const ResetPass = () => {
         setError(false);
         setLoading(false);
         setTimeout(() => {
-          navigate("/dashboard");
+          navigate("/");
         }, 3000);
       })
       .catch((e) => {
