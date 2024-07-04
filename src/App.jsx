@@ -6,6 +6,7 @@ import Dashboard from "./pages/Dashboard";
 import ProtectedRoute from "./components/ProtectedRoute";
 import { AuthProvider } from "./components/AuthContext";
 import Home from "./pages/Home";
+import ResetPass from "./pages/ResetPass";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
               </ProtectedRoute>
             }
           />
+          <Route path="/reset-password/:token" element={<ResetPass />} />
         </Routes>
       </BrowserRouter>
     </AuthProvider>
