@@ -31,11 +31,11 @@ const Login = ({ setActiveTab }) => {
       headers: {
         "Content-Type": "application/json",
       },
+      withCredentials: true,
       data: {
         email,
         password,
       },
-      // withCredentials: true,
     };
     axios(config)
       .then((res) => {
