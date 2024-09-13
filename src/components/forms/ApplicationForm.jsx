@@ -46,6 +46,18 @@ const ApplicationForm = ({ setTemp, setForm }) => {
     setValue("dateApplied", today);
   };
 
+  const validateDate = (value) => {
+    const today = new Date();
+    const oneYearAgo = new Date();
+    oneYearAgo.setFullYear(today.getFullYear() - 1);
+
+    const selectedDate = new Date(value);
+    return (
+      (selectedDate >= oneYearAgo && selectedDate <= today) ||
+      "Date must be within the last year and not in the future"
+    );
+  };
+
   const onSubmit = (data) => {
     console.log(data);
     addApplication(data);
@@ -110,6 +122,11 @@ const ApplicationForm = ({ setTemp, setForm }) => {
         />
       </div>
 
+      {errors.dateApplied && (
+        <p className="text-red-500 text-sm mt-1 flex justify-end">
+          {errors.dateApplied.message}
+        </p>
+      )}
       <div className="mb-4 md:flex items-center">
         <label
           htmlFor="dateApplied"
@@ -117,14 +134,16 @@ const ApplicationForm = ({ setTemp, setForm }) => {
         >
           Date Applied
         </label>
+
         <div className="flex w-full">
           <input
             type="date"
             id="dateApplied"
             {...register("dateApplied", {
               required: "Date applied is required",
+              validate: validateDate,
             })}
-            className={`shadow appearance-none border rounded-l w-full px-3 py-2 text-gray-700  focus:outline-blue-500 ${
+            className={`shadow appearance-none border rounded-l w-full px-3 py-2 text-gray-700 focus:outline-blue-500 ${
               errors.dateApplied ? "border-red-500" : ""
             }`}
           />
